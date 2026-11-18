@@ -77,10 +77,116 @@ select:focus[data-flux-control] {
 
 @layer components {
     .landing-page {
+        position: relative;
+        isolation: isolate;
         font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
         background-image:
             radial-gradient(circle at 76% 8%, rgb(88 73 142 / 0.13), transparent 25rem),
             radial-gradient(circle at 7% 21%, rgb(244 203 141 / 0.04), transparent 17rem);
+    }
+
+    .landing-page > main,
+    .landing-page > footer {
+        position: relative;
+    }
+
+    .landing-page > main .mystic-container,
+    .landing-page > footer .mystic-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .cosmic-atmosphere {
+        position: fixed;
+        z-index: 1;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .cosmic-stars,
+    .cosmic-smoke {
+        position: absolute;
+        display: block;
+        pointer-events: none;
+    }
+
+    .cosmic-stars {
+        inset: -8%;
+        background-repeat: repeat;
+        will-change: opacity, transform;
+    }
+
+    .cosmic-stars-near {
+        background-image:
+            radial-gradient(circle, rgb(255 230 185 / 0.92) 0 1px, transparent 1.6px),
+            radial-gradient(circle, rgb(216 193 250 / 0.78) 0 1px, transparent 1.7px),
+            radial-gradient(circle, rgb(255 255 255 / 0.56) 0 0.8px, transparent 1.4px);
+        background-position: 1rem 2rem, 6rem 9rem, 12rem 4rem;
+        background-size: 14rem 14rem, 19rem 19rem, 11rem 11rem;
+        opacity: 0.42;
+        animation: star-twinkle-near 4.8s ease-in-out infinite alternate;
+    }
+
+    .cosmic-stars-far {
+        background-image:
+            radial-gradient(circle, rgb(244 203 141 / 0.72) 0 0.7px, transparent 1.3px),
+            radial-gradient(circle, rgb(216 193 250 / 0.55) 0 0.8px, transparent 1.4px);
+        background-position: 3rem 7rem, 10rem 1rem;
+        background-size: 9rem 9rem, 13rem 13rem;
+        opacity: 0.3;
+        animation: star-twinkle-far 6.4s 1.2s ease-in-out infinite alternate;
+    }
+
+    .cosmic-smoke {
+        width: min(82rem, 132vw);
+        aspect-ratio: 1.85;
+        border-radius: 50%;
+        filter: blur(clamp(1.5rem, 3.5vw, 2.75rem)) saturate(1.15);
+        mix-blend-mode: screen;
+        opacity: 0.46;
+        will-change: opacity, transform;
+    }
+
+    .cosmic-smoke::before,
+    .cosmic-smoke::after {
+        position: absolute;
+        border-radius: inherit;
+        background: inherit;
+        content: '';
+        filter: blur(1.25rem);
+    }
+
+    .cosmic-smoke::before {
+        inset: 12% 8% 16%;
+        opacity: 0.72;
+        transform: rotate(6deg) scaleY(0.72);
+    }
+
+    .cosmic-smoke::after {
+        inset: 28% 4% 8% 18%;
+        opacity: 0.55;
+        transform: rotate(-9deg) scaleY(0.58);
+    }
+
+    .cosmic-smoke-one {
+        inset-block-start: 4%;
+        inset-inline-start: -22%;
+        background:
+            radial-gradient(ellipse at 28% 48%, rgb(151 111 218 / 0.92), transparent 42%),
+            radial-gradient(ellipse at 68% 44%, rgb(102 76 170 / 0.68), transparent 46%),
+            radial-gradient(ellipse at 52% 72%, rgb(216 193 250 / 0.35), transparent 40%);
+        animation: smoke-drift-one 20s ease-in-out infinite alternate;
+    }
+
+    .cosmic-smoke-two {
+        inset-block-end: -2%;
+        inset-inline-end: -24%;
+        background:
+            radial-gradient(ellipse at 66% 48%, rgb(199 151 225 / 0.72), transparent 43%),
+            radial-gradient(ellipse at 34% 55%, rgb(244 203 141 / 0.46), transparent 41%),
+            radial-gradient(ellipse at 52% 28%, rgb(96 74 165 / 0.62), transparent 45%);
+        animation: smoke-drift-two 24s 2s ease-in-out infinite alternate;
     }
 
     .mystic-container {
@@ -155,6 +261,7 @@ select:focus[data-flux-control] {
     .button {
         display: inline-flex;
         min-height: 3rem;
+        cursor: pointer;
         align-items: center;
         justify-content: center;
         gap: 0.55rem;
@@ -170,6 +277,7 @@ select:focus[data-flux-control] {
 
     .button:hover:not(:disabled) {
         transform: translateY(-2px);
+        filter: brightness(1.08) saturate(1.08);
     }
 
     .button:active:not(:disabled) {
@@ -195,7 +303,10 @@ select:focus[data-flux-control] {
     }
 
     .button-primary:hover {
-        background: rgb(216 193 250 / 0.2);
+        border-color: rgb(244 203 141 / 0.48);
+        background: rgb(216 193 250 / 0.24);
+        color: var(--color-mystic-gold);
+        box-shadow: 0 12px 28px rgb(0 0 0 / 0.22);
     }
 
     .button-gold {
@@ -206,7 +317,10 @@ select:focus[data-flux-control] {
     }
 
     .button-gold:hover:not(:disabled) {
-        box-shadow: 0 13px 34px rgb(244 203 141 / 0.25);
+        border-color: #fff3db;
+        background: linear-gradient(135deg, #fff0d2, #f6bb61);
+        color: #160e1e;
+        box-shadow: 0 13px 34px rgb(244 203 141 / 0.34);
     }
 
     .conversion-primary {
@@ -247,7 +361,9 @@ select:focus[data-flux-control] {
 
     .button-secondary:hover:not(:disabled) {
         border-color: rgb(244 203 141 / 0.45);
-        color: var(--color-mystic-ivory);
+        background: rgb(244 203 141 / 0.13);
+        color: var(--color-mystic-gold);
+        box-shadow: 0 10px 26px rgb(0 0 0 / 0.2);
     }
 
     .icon-button {
@@ -260,6 +376,14 @@ select:focus[data-flux-control] {
         border: 1px solid rgb(216 193 250 / 0.18);
         border-radius: 999px;
         color: var(--color-mystic-ivory);
+        transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .icon-button:hover {
+        transform: translateY(-2px);
+        border-color: rgb(244 203 141 / 0.48);
+        background: rgb(244 203 141 / 0.12);
+        color: var(--color-mystic-gold);
     }
 
     .icon-button::-webkit-details-marker {
@@ -437,19 +561,19 @@ select:focus[data-flux-control] {
 
     .deck-card-left {
         transform: translateX(-25%) rotate(-13deg) translateZ(-3rem);
-        animation: deck-left-open 600ms ease-out both;
+        animation: deck-left-open 7.2s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
     }
 
     .deck-card-right {
         transform: translateX(25%) rotate(13deg) translateZ(-3rem);
-        animation: deck-right-open 600ms ease-out both;
+        animation: deck-right-open 7.2s 90ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
     }
 
     .deck-card-main {
         z-index: 2;
         align-items: center;
         transform: translateY(-0.6rem);
-        animation: deck-main-open 560ms ease-out both;
+        animation: deck-main-open 7.2s 180ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
     }
 
     .card-orbit {
@@ -470,8 +594,7 @@ select:focus[data-flux-control] {
     }
 
     .section-shell {
-        border-block: 1px solid rgb(216 193 250 / 0.035);
-        background: var(--color-mystic-section);
+        background: rgb(13 16 36 / 0.9);
     }
 
     .section-heading {
@@ -648,9 +771,35 @@ select:focus[data-flux-control] {
         max-width: 19rem;
         aspect-ratio: 0.68;
         margin-inline: auto;
+        cursor: pointer;
         border-radius: 1.4rem;
         perspective: 1200px;
         text-align: initial;
+        transform-style: preserve-3d;
+        animation: cosmic-card-turn 6.4s ease-in-out infinite;
+        transition: filter 220ms ease;
+    }
+
+    .tarot-reading-card:nth-child(2) .tarot-card-button {
+        animation-delay: -2.1s;
+    }
+
+    .tarot-reading-card:nth-child(3) .tarot-card-button {
+        animation-delay: -4.2s;
+    }
+
+    .tarot-card-button:hover {
+        filter: brightness(1.14) drop-shadow(0 1.2rem 1.5rem rgb(0 0 0 / 0.28));
+    }
+
+    .tarot-card-button:hover .tarot-face {
+        border-color: rgb(244 203 141 / 0.58);
+        box-shadow: 0 28px 58px rgb(0 0 0 / 0.34), 0 0 1.8rem rgb(244 203 141 / 0.1);
+    }
+
+    .tarot-reading-card.is-revealed .tarot-card-button {
+        animation: none;
+        transform: translateY(-0.35rem) rotateY(0deg);
     }
 
     .tarot-card-inner {
@@ -679,6 +828,7 @@ select:focus[data-flux-control] {
         padding: 1.25rem;
         backface-visibility: hidden;
         box-shadow: 0 22px 45px rgb(0 0 0 / 0.26);
+        transition: border-color 220ms ease, box-shadow 220ms ease;
     }
 
     .tarot-back {
@@ -770,9 +920,10 @@ select:focus[data-flux-control] {
         flex-direction: column;
         border: 1px solid rgb(216 193 250 / 0.09);
         border-radius: 1.4rem;
-        background: var(--color-mystic-panel);
+        cursor: pointer;
+        background-color: var(--color-mystic-panel);
         padding: 1.6rem;
-        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
     }
 
     .services-section.is-in-view .service-card {
@@ -788,23 +939,28 @@ select:focus[data-flux-control] {
     }
 
     .service-card:hover {
-        border-color: rgb(216 193 250 / 0.25);
-        transform: translateY(-0.2rem);
+        transform: translateY(-0.45rem);
+        border-color: rgb(244 203 141 / 0.58);
+        background-color: var(--color-mystic-panel-light);
+        box-shadow: 0 28px 65px rgb(0 0 0 / 0.3), 0 0 2rem rgb(244 203 141 / 0.08);
+    }
+
+    .service-card:hover h3,
+    .service-card:hover .service-price {
+        color: var(--color-mystic-gold);
     }
 
     .service-card.is-selected {
         border-color: rgb(244 203 141 / 0.55);
-        background:
-            radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.1), transparent 12rem),
-            var(--color-mystic-panel);
+        background-color: var(--color-mystic-panel);
+        background-image: radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.1), transparent 12rem);
         box-shadow: 0 22px 55px rgb(0 0 0 / 0.2), 0 0 0 2px rgb(244 203 141 / 0.08);
     }
 
     .service-card-featured {
         border-color: rgb(244 203 141 / 0.62);
-        background:
-            radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.12), transparent 13rem),
-            var(--color-mystic-panel);
+        background-color: var(--color-mystic-panel);
+        background-image: radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.12), transparent 13rem);
         box-shadow: 0 24px 60px rgb(0 0 0 / 0.2);
     }
 
@@ -838,6 +994,7 @@ select:focus[data-flux-control] {
         font-weight: 600;
         line-height: 1.05;
         color: var(--color-mystic-ivory);
+        transition: color 220ms ease;
     }
 
     .service-hook {
@@ -857,6 +1014,7 @@ select:focus[data-flux-control] {
         font-size: 2.5rem;
         font-weight: 700;
         line-height: 1;
+        transition: color 220ms ease;
     }
 
     .service-description {
@@ -1289,7 +1447,6 @@ select:focus[data-flux-control] {
     }
 
     .site-footer {
-        border-block-start: 1px solid rgb(216 193 250 / 0.06);
         background: #090c1d;
     }
 
@@ -1415,33 +1572,123 @@ select:focus[data-flux-control] {
     }
 }
 
-@keyframes deck-left-open {
+@keyframes star-twinkle-near {
+    0%, 100% {
+        opacity: 0.22;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    45% {
+        opacity: 0.58;
+        transform: translate3d(0.15rem, -0.12rem, 0) scale(1.015);
+    }
+
+    72% {
+        opacity: 0.34;
+    }
+}
+
+@keyframes star-twinkle-far {
+    0%, 100% {
+        opacity: 0.16;
+        transform: translate3d(0, 0, 0);
+    }
+
+    38% {
+        opacity: 0.4;
+    }
+
+    68% {
+        opacity: 0.24;
+        transform: translate3d(-0.12rem, 0.16rem, 0);
+    }
+}
+
+@keyframes smoke-drift-one {
     from {
-        transform: translateX(0) rotate(0) translateZ(-3rem);
+        opacity: 0.38;
+        transform: translate3d(-8%, -3%, 0) scale(0.92) rotate(-5deg);
     }
 
     to {
+        opacity: 0.66;
+        transform: translate3d(30%, 14%, 0) scale(1.14) rotate(8deg);
+    }
+}
+
+@keyframes smoke-drift-two {
+    from {
+        opacity: 0.32;
+        transform: translate3d(10%, 10%, 0) scale(0.94) rotate(5deg);
+    }
+
+    to {
+        opacity: 0.58;
+        transform: translate3d(-28%, -14%, 0) scale(1.12) rotate(-7deg);
+    }
+}
+
+@keyframes deck-left-open {
+    0%, 38%, 100% {
         transform: translateX(-25%) rotate(-13deg) translateZ(-3rem);
+    }
+
+    8% {
+        transform: translateX(-7%) translateY(-0.9rem) rotate(-3deg) translateZ(-2rem);
+    }
+
+    17% {
+        transform: translateX(18%) translateY(0.45rem) rotate(6deg) translateZ(-1rem);
+    }
+
+    27% {
+        transform: translateX(-4%) translateY(-0.35rem) rotate(-2deg) translateZ(-2rem);
     }
 }
 
 @keyframes deck-right-open {
-    from {
-        transform: translateX(0) rotate(0) translateZ(-3rem);
+    0%, 38%, 100% {
+        transform: translateX(25%) rotate(13deg) translateZ(-3rem);
     }
 
-    to {
-        transform: translateX(25%) rotate(13deg) translateZ(-3rem);
+    8% {
+        transform: translateX(7%) translateY(0.55rem) rotate(3deg) translateZ(-1rem);
+    }
+
+    17% {
+        transform: translateX(-18%) translateY(-0.85rem) rotate(-6deg) translateZ(-2rem);
+    }
+
+    27% {
+        transform: translateX(5%) translateY(0.25rem) rotate(2deg) translateZ(-2rem);
     }
 }
 
 @keyframes deck-main-open {
-    from {
-        transform: translateY(0.5rem) scale(0.96);
+    0%, 38%, 100% {
+        transform: translateY(-0.6rem) translateX(0) rotate(0) scale(1);
     }
 
-    to {
-        transform: translateY(-0.6rem) scale(1);
+    8% {
+        transform: translateY(-1.2rem) translateX(5%) rotate(2deg) scale(1.015);
+    }
+
+    17% {
+        transform: translateY(0.25rem) translateX(-5%) rotate(-2deg) scale(0.985);
+    }
+
+    27% {
+        transform: translateY(-0.9rem) translateX(2%) rotate(0.7deg) scale(1.01);
+    }
+}
+
+@keyframes cosmic-card-turn {
+    0%, 100% {
+        transform: perspective(1200px) translateY(0) rotateY(-5deg) rotateZ(-0.35deg);
+    }
+
+    50% {
+        transform: perspective(1200px) translateY(-0.55rem) rotateY(5deg) rotateZ(0.35deg);
     }
 }
 

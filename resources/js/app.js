@@ -98,6 +98,8 @@ const initializePublicPage = () => {
         && serviceAnnouncement
     ) {
         serviceButtons.forEach((button) => {
+            const serviceCard = button.closest('[data-service-card]');
+
             button.addEventListener('click', () => {
                 serviceButtons.forEach((serviceButton) => {
                     serviceButton.setAttribute('aria-pressed', 'false');
@@ -111,6 +113,14 @@ const initializePublicPage = () => {
                 selectedServicePrice.textContent = button.dataset.servicePrice;
                 selectedServiceDetails.hidden = false;
                 serviceAnnouncement.textContent = `${button.dataset.serviceName}, ${button.dataset.servicePrice}, seleccionada. Reservas en línea próximamente.`;
+            });
+
+            serviceCard?.addEventListener('click', (event) => {
+                if (event.target.closest('a, button')) {
+                    return;
+                }
+
+                button.click();
             });
         });
     }

@@ -16,6 +16,13 @@
     <body class="landing-page min-h-dvh overflow-x-hidden bg-mystic-ink text-mystic-ivory antialiased" data-public-page>
         <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
+        <div class="cosmic-atmosphere" aria-hidden="true">
+            <span class="cosmic-stars cosmic-stars-near"></span>
+            <span class="cosmic-stars cosmic-stars-far"></span>
+            <span class="cosmic-smoke cosmic-smoke-one"></span>
+            <span class="cosmic-smoke cosmic-smoke-two"></span>
+        </div>
+
         <header class="site-header">
             <div class="mystic-container flex min-h-18 items-center justify-between gap-3 py-3">
                 <a href="#inicio" class="brand group" aria-label="Diosa Mística, volver al inicio">
@@ -112,7 +119,7 @@
                 </div>
             </section>
 
-            <section id="servicios" class="services-section scroll-mt-20 bg-mystic-ink py-20 sm:py-28" aria-labelledby="services-title" data-sticky-cta-hide>
+            <section id="servicios" class="services-section scroll-mt-20 bg-mystic-ink/90 py-20 sm:py-28" aria-labelledby="services-title" data-sticky-cta-hide>
                 <div class="mystic-container">
                     <div class="section-heading">
                         <p class="eyebrow justify-center">Lecturas y precios</p>
@@ -198,7 +205,7 @@
                 </div>
             </section>
 
-            <section id="tirada" class="scroll-mt-20 bg-mystic-ink" aria-labelledby="tirada-title">
+            <section id="tirada" class="scroll-mt-20 bg-mystic-ink/90" aria-labelledby="tirada-title">
                 <div class="mystic-container py-20 sm:py-28">
                     <div class="section-heading max-w-3xl">
                         <p class="eyebrow justify-center">Tirada de muestra</p>
