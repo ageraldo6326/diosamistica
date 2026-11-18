@@ -11,7 +11,7 @@ it('renders each service page with its confirmed information', function (string 
         ->assertSeeText('Reservas en línea próximamente')
         ->assertSeeText('Este sitio presenta la información del servicio. No procesa pagos ni reservas.');
 })->with([
-    'general reading' => ['general', 'Lectura general', 'US$87', 'Duración de 20–25 minutos'],
+    'general reading' => ['general', 'Lectura general', 'US$87', 'Duración de 20 a 25 minutos'],
     'emergency reading' => ['emergencia', 'Lectura de emergencia', 'US$120', 'Disponibilidad por confirmar'],
     'single question reading' => ['una-pregunta', 'Lectura de una sola pregunta', 'US$20', 'Una pregunta concreta'],
 ]);

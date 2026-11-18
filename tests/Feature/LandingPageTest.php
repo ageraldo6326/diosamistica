@@ -1,22 +1,29 @@
 <?php
 
-it('renders the public landing page with the service catalog', function () {
+it('renders the conversion journey with services before the tarot sample', function () {
     $response = $this->get(route('home'));
 
     $response
         ->assertOk()
-        ->assertSeeText('Elige una carta del Cosmos')
-        ->assertSeeText('¿Cómo funciona la lectura?')
-        ->assertSeeText('Esta demostración no crea una cuenta, un PIN ni una lectura real.')
-        ->assertSeeText('Tirada de muestra')
-        ->assertSeeText('Lectura general')
-        ->assertSeeText('US$87')
-        ->assertSeeText('Lectura de emergencia')
-        ->assertSeeText('US$120')
-        ->assertSeeText('Disponibilidad por confirmar')
-        ->assertSeeText('Lectura de una sola pregunta')
-        ->assertSeeText('US$20')
+        ->assertSeeText('Lecturas de tarot con Diosa Mística')
+        ->assertSeeText('Explora lo que te inquieta con una lectura simbólica. Elige el formato que más te sirva, desde US$20.')
+        ->assertSeeTextInOrder([
+            'Elige tu lectura',
+            'Conoce a Diosa Mística',
+            'Elige una carta del cosmos',
+            'Preguntas frecuentes',
+            'Encuentra la lectura que mejor se ajusta a lo que buscas',
+        ])
+        ->assertSeeTextInOrder([
+            'Lectura general',
+            'Lectura de una sola pregunta',
+            'Lectura de emergencia',
+        ])
+        ->assertSeeText('Elegir lectura general')
+        ->assertSeeText('Elegir una pregunta')
+        ->assertSeeText('Elegir lectura prioritaria')
         ->assertSeeText('Reservas en línea próximamente')
-        ->assertDontSeeText('Precio por definir')
-        ->assertDontSeeText('Horarios por publicar');
+        ->assertSeeText('Métodos previstos para las reservas: PayPal y transferencias a Banco BHD, Banco Popular o Banreservas.')
+        ->assertDontSeeText('Activa tu consulta simbólica')
+        ->assertDontSeeText('Correo electrónico verificable');
 });

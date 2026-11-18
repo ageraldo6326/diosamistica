@@ -36,7 +36,8 @@
                     <a href="{{ route('home') }}" class="nav-link">Inicio</a>
                     <a href="{{ route('home') }}#servicios" class="nav-link">Servicios y precios</a>
                     <a href="{{ route('home') }}#tirada" class="nav-link">Tirada de muestra</a>
-                    <a href="{{ route('home') }}#sesion" class="nav-link">Sesión en vivo</a>
+                    <a href="{{ route('home') }}#conocela" class="nav-link">Diosa Mística</a>
+                    <a href="{{ route('home') }}#preguntas" class="nav-link">Preguntas frecuentes</a>
                 </nav>
 
                 <div class="flex items-center gap-2">
@@ -55,7 +56,8 @@
                             <a href="{{ route('home') }}">Inicio</a>
                             <a href="{{ route('home') }}#servicios">Servicios y precios</a>
                             <a href="{{ route('home') }}#tirada">Tirada de muestra</a>
-                            <a href="{{ route('home') }}#sesion">Sesión en vivo</a>
+                            <a href="{{ route('home') }}#conocela">Diosa Mística</a>
+                            <a href="{{ route('home') }}#preguntas">Preguntas frecuentes</a>
                         </nav>
                     </details>
                 </div>

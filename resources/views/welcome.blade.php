@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Diosa Mística: una experiencia de lectura simbólica para conectar con tu intuición.">
+        <meta name="description" content="Lecturas de tarot con Diosa Mística desde US$20. Elige una sesión en vivo, una pregunta puntual o atención prioritaria.">
         <meta name="theme-color" content="#0D1024">
 
-        <title>Diosa Mística · Lecturas simbólicas</title>
+        <title>Diosa Mística · Lecturas de tarot</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,600,700|dm-sans:400,500,600,700&display=swap" rel="stylesheet" />
@@ -33,26 +33,15 @@
                 </a>
 
                 <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
-                    <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+                    <a href="#servicios" class="nav-link">Lecturas y precios</a>
+                    <a href="#conocela" class="nav-link">Diosa Mística</a>
                     <a href="#tirada" class="nav-link">Tirada de muestra</a>
-                    <a href="#servicios" class="nav-link">Servicios y precios</a>
-                    <a href="#sesion" class="nav-link">Sesión en vivo</a>
+                    <a href="#preguntas" class="nav-link">Preguntas frecuentes</a>
                 </nav>
 
                 <div class="flex items-center gap-2">
-                    @auth
-                        <a href="{{ route('dashboard') }}" class="hidden px-3 py-2 text-sm font-semibold text-mystic-lavender transition hover:text-mystic-ivory focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mystic-gold sm:inline-flex">
-                            Mi espacio
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="hidden px-3 py-2 text-sm font-semibold text-mystic-lavender transition hover:text-mystic-ivory focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mystic-gold sm:inline-flex">
-                            Acceder
-                        </a>
-                    @endauth
-
-                    <a href="#servicios" class="header-services-cta button button-primary min-h-11 px-4 sm:px-5" data-focus-target="services-title">
-                        <span class="sm:hidden">Servicios</span>
-                        <span class="hidden sm:inline">Ver servicios</span>
+                    <a href="#servicios" class="header-services-cta button button-primary min-h-11 px-4 sm:px-5" data-focus-target="services-title" data-conversion-cta="header">
+                        Ver lecturas y precios
                     </a>
 
                     <details class="mobile-menu relative lg:hidden">
@@ -62,15 +51,10 @@
                             </svg>
                         </summary>
                         <nav class="mobile-menu-panel" aria-label="Navegación móvil">
-                            <a href="#como-funciona">Cómo funciona</a>
+                            <a href="#servicios">Lecturas y precios</a>
+                            <a href="#conocela">Diosa Mística</a>
                             <a href="#tirada">Tirada de muestra</a>
-                            <a href="#servicios">Servicios y precios</a>
-                            <a href="#sesion">Sesión en vivo</a>
-                            @auth
-                                <a href="{{ route('dashboard') }}">Mi espacio</a>
-                            @else
-                                <a href="{{ route('login') }}">Acceder</a>
-                            @endauth
+                            <a href="#preguntas">Preguntas frecuentes</a>
                         </nav>
                     </details>
                 </div>
@@ -78,65 +62,35 @@
         </header>
 
         <main id="contenido">
-            <section id="inicio" class="hero-section scroll-mt-24" aria-labelledby="hero-title">
-                <div class="mystic-container grid items-center gap-10 py-12 sm:py-16 lg:min-h-[760px] lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24">
+            <section id="inicio" class="hero-section scroll-mt-24" aria-labelledby="hero-title" data-conversion-hero>
+                <div class="mystic-container grid items-center gap-8 py-10 sm:py-16 lg:min-h-[720px] lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:py-20">
                     <div class="hero-copy relative z-10 max-w-2xl">
                         <p class="eyebrow">
                             <span aria-hidden="true">✦</span>
-                            Diosa Mística Sanctum
+                            Orientación simbólica
                         </p>
-                        <h1 id="hero-title" class="mt-5 font-mystic text-[clamp(3.1rem,12vw,5.6rem)] leading-[0.88] font-medium tracking-[-0.035em] text-mystic-ivory">
-                            Elige una carta del <em class="block font-medium text-mystic-gold">Cosmos</em>
+                        <h1 id="hero-title" class="mt-5 font-mystic text-[clamp(3rem,11vw,5.8rem)] leading-[0.9] font-medium tracking-[-0.035em] text-mystic-ivory">
+                            Lecturas de tarot con <em class="block font-medium text-mystic-gold">Diosa Mística</em>
                         </h1>
                         <p class="mt-6 max-w-xl text-base leading-7 text-mystic-ivory/72 sm:text-lg">
-                            Abre una lectura simbólica guiada por arquetipos. Un momento íntimo para escuchar tu intuición y mirar tu presente desde otra perspectiva.
+                            Explora lo que te inquieta con una lectura simbólica. Elige el formato que más te sirva, desde US$20.
                         </p>
 
-                        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                            <a href="#servicios" class="button button-gold w-full sm:w-auto" data-focus-target="services-title">
-                                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                                    <path d="m12 3 .8 2.5L15.5 6l-2.3 1.5.3 2.7L12 8.4l-1.5 1.8.3-2.7L8.5 6l2.7-.5L12 3ZM5 13l.6 1.7 1.8.3-1.5 1 .2 1.9L5 16.6l-1.1 1.3.2-1.9-1.5-1 1.8-.3L5 13Zm13 1 .7 2.2 2.3.4-1.9 1.3.3 2.3-1.4-1.7-1.4 1.7.3-2.3-1.9-1.3 2.3-.4L18 14Z" />
-                                </svg>
-                                Ver servicios y precios
+                        <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                            <a href="#servicios" class="button button-gold conversion-primary w-full sm:w-auto" data-focus-target="services-title" data-conversion-cta="hero">
+                                Ver lecturas y precios
+                                <span class="conversion-arrow" aria-hidden="true">→</span>
                             </a>
-                            <span class="inline-flex items-center gap-2 text-xs font-semibold text-mystic-lavender/80">
-                                <svg viewBox="0 0 24 24" class="size-4 text-mystic-gold" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-                                    <path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10M6 10h12v10H6V10Z" />
-                                </svg>
-                                Tres lecturas · precios claros en USD
-                            </span>
-                        </div>
-
-                        <div class="mt-8 grid gap-3 sm:grid-cols-2">
-                            <a href="#sesion" class="hero-access-card">
-                                <span class="access-icon" aria-hidden="true">☾</span>
-                                <span>
-                                    <span class="access-label">Presencial / en vivo</span>
-                                    <strong>Lectura en vivo</strong>
-                                    <small>Conoce la experiencia personal</small>
-                                </span>
-                                <span aria-hidden="true">↗</span>
-                            </a>
-                            <a href="#servicios" class="hero-access-card">
-                                <span class="access-icon" aria-hidden="true">✧</span>
-                                <span>
-                                    <span class="access-label">Catálogo de lecturas</span>
-                                    <strong>Servicios de lectura</strong>
-                                    <small>Compara opciones y precios</small>
-                                </span>
-                                <span aria-hidden="true">↗</span>
+                            <a href="#tirada" class="button button-secondary w-full sm:w-auto" data-focus-target="tirada-title">
+                                Probar una tirada de muestra
                             </a>
                         </div>
                     </div>
 
-                    <div class="hero-deck" aria-label="Ilustración de una baraja mística">
+                    <div class="hero-deck" aria-label="Ilustración de una baraja mística abriéndose en abanico">
                         <div class="deck-halo" aria-hidden="true"></div>
-                        <div class="deck-card deck-card-left" aria-hidden="true">
-                            <span>✦</span>
-                        </div>
-                        <div class="deck-card deck-card-right" aria-hidden="true">
-                            <span>✦</span>
-                        </div>
+                        <div class="deck-card deck-card-left" aria-hidden="true"><span>✦</span></div>
+                        <div class="deck-card deck-card-right" aria-hidden="true"><span>✦</span></div>
                         <div class="deck-card deck-card-main" aria-hidden="true">
                             <div class="flex w-full items-center justify-between text-mystic-gold">
                                 <span>✦</span><span class="text-[0.58rem] font-bold uppercase tracking-[0.28em]">Oráculo eterno</span><span>✦</span>
@@ -158,92 +112,98 @@
                 </div>
             </section>
 
-            <section id="como-funciona" class="section-shell scroll-mt-20" aria-labelledby="steps-title">
-                <div class="mystic-container py-20 sm:py-24">
+            <section id="servicios" class="services-section scroll-mt-20 bg-mystic-ink py-20 sm:py-28" aria-labelledby="services-title" data-sticky-cta-hide>
+                <div class="mystic-container">
                     <div class="section-heading">
-                        <p class="eyebrow justify-center"><span aria-hidden="true">✦</span> El proceso encantado <span aria-hidden="true">✦</span></p>
-                        <h2 id="steps-title">¿Cómo funciona la lectura?</h2>
-                        <p>Tres pasos sencillos para abrir el portal y guardar tu experiencia de forma segura.</p>
+                        <p class="eyebrow justify-center">Lecturas y precios</p>
+                        <h2 id="services-title" tabindex="-1">Elige tu lectura</h2>
+                        <p>Una sesión en vivo, una pregunta puntual o atención prioritaria.</p>
                     </div>
 
-                    <ol class="mt-12 grid gap-4 md:grid-cols-3">
-                        <li class="step-card">
-                            <span class="step-number">I</span>
-                            <h3>Regístrate</h3>
-                            <p>Comparte tu nombre y un correo al que tengas acceso para iniciar el recorrido.</p>
-                            <span class="step-note">✧ Sin tarjetas ni suscripción</span>
-                        </li>
-                        <li class="step-card">
-                            <span class="step-number">II</span>
-                            <h3>Verifica tu correo</h3>
-                            <p>En la experiencia final recibirás un enlace seguro que confirmará tu dirección.</p>
-                            <span class="step-note">✧ Verificación pendiente de integración</span>
-                        </li>
-                        <li class="step-card">
-                            <span class="step-number">III</span>
-                            <h3>Accede por PIN</h3>
-                            <p>El PIN sagrado será tu llave privada cuando la activación real esté disponible.</p>
-                            <span class="step-note">✧ Acceso aún no habilitado</span>
-                        </li>
-                    </ol>
+                    <div class="service-grid mt-12 grid items-stretch gap-5 lg:grid-cols-3">
+                        @foreach ($readingServices as $readingService)
+                            @php($price = 'US$'.number_format($readingService['price_cents'] / 100, 0))
+
+                            <article class="service-card {{ ($readingService['featured'] ?? false) ? 'service-card-featured' : '' }}" data-service-card>
+                                @if ($readingService['featured'] ?? false)
+                                    <span class="service-featured-badge">Sesión en vivo</span>
+                                @endif
+
+                                <p class="service-label">{{ $readingService['eyebrow'] }}</p>
+                                <h3>{{ $readingService['name'] }}</h3>
+                                <p class="service-hook">{{ $readingService['hook'] }}</p>
+                                <p class="service-price">{{ $price }}</p>
+                                <p class="service-description">{{ $readingService['summary'] }}</p>
+
+                                @isset($readingService['status'])
+                                    <p class="service-status">{{ $readingService['status'] }}</p>
+                                @endisset
+
+                                <div class="mt-auto grid gap-3 pt-7">
+                                    <a href="{{ route('services.show', $readingService['slug']) }}" class="service-detail-link">
+                                        Ver detalles
+                                        <span aria-hidden="true">↗</span>
+                                    </a>
+                                    <button
+                                        type="button"
+                                        class="button {{ ($readingService['featured'] ?? false) ? 'button-gold' : 'button-secondary' }} w-full"
+                                        data-select-service
+                                        data-service-name="{{ $readingService['name'] }}"
+                                        data-service-price="{{ $price }}"
+                                        data-service-choice="{{ $readingService['slug'] }}"
+                                        aria-pressed="false"
+                                    >
+                                        {{ $readingService['cta'] }}
+                                    </button>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    <aside class="service-selection" aria-labelledby="selected-service-title" data-service-selection>
+                        <div>
+                            <p class="service-label">Tu elección</p>
+                            <h3 id="selected-service-title" data-selected-service-name>Selecciona una lectura</h3>
+                            <p data-selected-service-message>Compara las opciones y elige la que mejor se ajuste a lo que buscas.</p>
+                        </div>
+                        <div class="service-selection-price" data-selected-service-details hidden>
+                            <strong data-selected-service-price></strong>
+                            <span>Reservas en línea próximamente</span>
+                        </div>
+                        <p class="sr-only" data-service-announcement aria-live="polite" aria-atomic="true"></p>
+                    </aside>
                 </div>
             </section>
 
-            <section id="lectura" class="scroll-mt-24 bg-mystic-ink px-4 py-20 sm:py-24" aria-labelledby="lectura-title">
-                <div class="reading-panel mx-auto max-w-2xl">
-                    <span class="panel-sigil" aria-hidden="true">☼</span>
-                    <div class="text-center">
-                        <p class="eyebrow justify-center">Prototipo interactivo</p>
-                        <h2 id="lectura-title" tabindex="-1" class="mt-3 font-mystic text-3xl font-medium text-mystic-ivory outline-none sm:text-4xl">Activa tu consulta simbólica</h2>
-                        <p class="mx-auto mt-3 max-w-lg text-sm leading-6 text-mystic-ivory/65">Completa los datos para revisar la experiencia. No guardaremos información ni enviaremos correos desde este prototipo.</p>
-                    </div>
-
-                    <form class="mt-8 grid gap-5" data-prototype-form novalidate>
-                        <div class="form-field">
-                            <label for="full-name">Tu nombre completo</label>
-                            <div class="input-wrap">
-                                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                                    <circle cx="12" cy="8" r="3.5" /><path d="M5 20c.5-4.2 2.8-6.5 7-6.5s6.5 2.3 7 6.5" />
-                                </svg>
-                                <input id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Mariana Valenzuela" aria-describedby="full-name-error" required>
-                            </div>
-                            <p id="full-name-error" class="field-error" data-error-for="full-name" aria-live="polite"></p>
+            <section id="conocela" class="section-shell scroll-mt-20 py-20 sm:py-28" aria-labelledby="about-title">
+                <div class="mystic-container">
+                    <div class="about-reader-panel">
+                        <div class="about-reader-symbol" aria-hidden="true">
+                            <span>✦</span>
+                            <span class="about-reader-moon">☾</span>
+                            <span>✦</span>
                         </div>
-
-                        <div class="form-field">
-                            <label for="email">Correo electrónico verificable</label>
-                            <div class="input-wrap">
-                                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                                    <rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" />
-                                </svg>
-                                <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="mariana@destino.com" aria-describedby="email-error" required>
+                        <div>
+                            <p class="eyebrow">Quién realiza la lectura</p>
+                            <h2 id="about-title" class="mt-4 font-mystic text-[clamp(2.7rem,8vw,4.8rem)] leading-[0.94] font-medium text-mystic-ivory">Conoce a Diosa Mística</h2>
+                            <p class="mt-6 max-w-2xl text-base leading-8 text-mystic-ivory/70 sm:text-lg">En la lectura general conversas directamente con Diosa Mística por Google Meet.</p>
+                            <div class="mt-7 flex flex-wrap gap-3 text-sm text-mystic-lavender">
+                                <span class="reader-fact">20 a 25 minutos</span>
+                                <span class="reader-fact">Conversación uno a uno</span>
+                                <span class="reader-fact">Google Meet</span>
                             </div>
-                            <p id="email-error" class="field-error" data-error-for="email" aria-live="polite"></p>
+                            <a href="{{ route('services.show', 'general') }}" class="button button-secondary mt-8">Conocer la lectura general</a>
                         </div>
-
-                        <button type="submit" class="button button-gold w-full">
-                            <span aria-hidden="true">✧</span>
-                            Validar datos del prototipo
-                        </button>
-
-                        <p class="prototype-status" data-form-status role="status" aria-live="polite">
-                            <span aria-hidden="true">⌁</span>
-                            Esta demostración no crea una cuenta, un PIN ni una lectura real.
-                        </p>
-                    </form>
-
-                    <div class="mt-6 border-t border-mystic-lavender/10 pt-6 text-center">
-                        <a href="#tirada" class="button button-secondary w-full sm:w-auto" data-focus-target="tirada-title">Probar la tirada de muestra</a>
                     </div>
                 </div>
             </section>
 
-            <section id="tirada" class="section-shell scroll-mt-20" aria-labelledby="tirada-title">
+            <section id="tirada" class="scroll-mt-20 bg-mystic-ink" aria-labelledby="tirada-title">
                 <div class="mystic-container py-20 sm:py-28">
                     <div class="section-heading max-w-3xl">
                         <p class="eyebrow justify-center">Tirada de muestra</p>
-                        <h2 id="tirada-title" tabindex="-1">Tu tirada tríptica del destino</h2>
-                        <p>Revela cada arquetipo por separado. La interpretación es simbólica y está pensada como una pausa para reflexionar.</p>
+                        <h2 id="tirada-title" tabindex="-1">Elige una carta del cosmos</h2>
+                        <p>Toca una carta y descubre una pregunta para reflexionar.</p>
                     </div>
 
                     <p id="card-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></p>
@@ -322,102 +282,57 @@
                         </article>
                     </div>
 
-                    <div class="mt-10 text-center">
+                    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <button type="button" class="button button-secondary" data-reset-reading disabled>Reiniciar tirada</button>
+                        <a href="#servicios" class="button button-gold" data-reading-cta data-focus-target="services-title" data-conversion-cta="reading" hidden>
+                            Ver lecturas y precios
+                        </a>
                     </div>
                 </div>
             </section>
 
-            <section id="servicios" class="scroll-mt-20 bg-mystic-ink py-20 sm:py-28" aria-labelledby="services-title">
+            <section id="preguntas" class="section-shell scroll-mt-20 py-20 sm:py-28" aria-labelledby="faq-title">
                 <div class="mystic-container">
                     <div class="section-heading">
-                        <p class="eyebrow justify-center">Elige tu lectura</p>
-                        <h2 id="services-title" tabindex="-1">Servicios y precios</h2>
-                        <p>Tres formas de recibir orientación simbólica, con precios claros en dólares estadounidenses.</p>
+                        <p class="eyebrow justify-center">Antes de elegir</p>
+                        <h2 id="faq-title">Preguntas frecuentes</h2>
+                        <p>Información clara sobre la experiencia y el estado actual de las reservas.</p>
                     </div>
 
-                    <div class="mt-12 grid items-stretch gap-5 lg:grid-cols-3">
-                        @foreach ($readingServices as $readingService)
-                            @php($price = 'US$'.number_format($readingService['price_cents'] / 100, 0))
-
-                            <article class="service-card" data-service-card>
-                                <p class="service-label">{{ $readingService['eyebrow'] }}</p>
-                                <h3>{{ $readingService['name'] }}</h3>
-                                <p class="service-price">{{ $price }}</p>
-                                <p class="service-description">{{ $readingService['summary'] }}</p>
-
-                                @isset($readingService['status'])
-                                    <p class="service-status">{{ $readingService['status'] }}</p>
-                                @endisset
-
-                                <div class="mt-auto grid gap-3 pt-7">
-                                    <a href="{{ route('services.show', $readingService['slug']) }}" class="service-detail-link">
-                                        Ver detalles
-                                        <span aria-hidden="true">↗</span>
-                                    </a>
-                                    <button
-                                        type="button"
-                                        class="button button-secondary w-full"
-                                        data-select-service
-                                        data-service-name="{{ $readingService['name'] }}"
-                                        data-service-price="{{ $price }}"
-                                        aria-pressed="false"
-                                    >
-                                        Elegir esta lectura
-                                    </button>
-                                </div>
-                            </article>
-                        @endforeach
+                    <div class="faq-list mx-auto mt-12 grid max-w-3xl gap-3">
+                        <details class="faq-item">
+                            <summary>¿Quién me atiende?</summary>
+                            <p>La lectura general la realiza Diosa Mística en una conversación directa por Google Meet.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>¿Cómo funciona la lectura general?</summary>
+                            <p>Es una sesión en vivo de 20 a 25 minutos para conversar sobre el tema que quieres explorar.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>¿Cómo podré pagar?</summary>
+                            <p>Métodos previstos para las reservas: PayPal y transferencias a Banco BHD, Banco Popular o Banreservas. Todavía no hay enlaces de cobro activos.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>¿Ya puedo reservar?</summary>
+                            <p>Reservas en línea próximamente. Por ahora puedes comparar las opciones y dejar seleccionada la lectura que te interesa.</p>
+                        </details>
                     </div>
 
-                    <aside class="service-selection" aria-labelledby="selected-service-title">
-                        <div>
-                            <p class="service-label">Tu elección</p>
-                            <h3 id="selected-service-title" data-selected-service-name>Selecciona una lectura</h3>
-                            <p data-selected-service-message>Compara las opciones y elige la que mejor se ajuste a tu consulta.</p>
-                        </div>
-                        <div class="service-selection-price" data-selected-service-details hidden>
-                            <strong data-selected-service-price></strong>
-                            <span>Reservas en línea próximamente</span>
-                        </div>
-                        <p class="sr-only" data-service-announcement aria-live="polite"></p>
-                    </aside>
-
-                    <p class="payment-note">Métodos previstos para las reservas: PayPal y transferencias a Banco BHD, Banco Popular o Banreservas</p>
-                </div>
-            </section>
-
-            <section id="sesion" class="section-shell scroll-mt-20 py-20 sm:py-28" aria-labelledby="live-title">
-                <div class="mystic-container">
-                    <div class="live-panel">
-                        <div>
-                            <p class="eyebrow">Encuentro personal</p>
-                            <h2 id="live-title" class="mt-3 font-mystic text-4xl leading-none font-medium text-mystic-ivory sm:text-5xl">Lectura general en vivo con Diosa Mística</h2>
-                            <p class="mt-5 max-w-2xl text-sm leading-7 text-mystic-ivory/68 sm:text-base">Un encuentro individual por Google Meet para explorar tus preguntas con calma y recibir orientación simbólica.</p>
-                            <ul class="mt-6 grid gap-3 text-sm text-mystic-lavender sm:grid-cols-2">
-                                <li>✦ Acompañamiento uno a uno</li>
-                                <li>✦ Duración de 20–25 minutos</li>
-                                <li>✦ Encuentro por Google Meet</li>
-                                <li>✦ US$87</li>
-                            </ul>
-                        </div>
-
-                        <aside class="schedule-card" aria-label="Disponibilidad de sesiones">
-                            <span class="schedule-icon" aria-hidden="true">☾</span>
-                            <p class="eyebrow justify-center">Encuentro personal</p>
-                            <h3>Conoce la lectura general</h3>
-                            <p>Revisa los detalles o vuelve al catálogo para seleccionar esta lectura. Las reservas aún no están activas.</p>
-                            <a href="{{ route('services.show', 'general') }}" class="button button-gold w-full">Ver detalles</a>
-                            <a href="#servicios" class="button button-secondary mt-3 w-full" data-focus-target="services-title">Ver servicios y precios</a>
-                        </aside>
+                    <div class="closing-cta" data-sticky-cta-hide data-closing-cta>
+                        <span class="closing-sigil" aria-hidden="true">☾</span>
+                        <h2>Encuentra la lectura que mejor se ajusta a lo que buscas</h2>
+                        <a href="#servicios" class="button button-gold conversion-primary" data-focus-target="services-title" data-conversion-cta="closing">
+                            Ver lecturas y precios
+                            <span class="conversion-arrow" aria-hidden="true">→</span>
+                        </a>
                     </div>
                 </div>
             </section>
         </main>
 
-        <footer class="site-footer">
-            <div class="mystic-container py-14 sm:py-16">
-                <div class="grid gap-10 border-b border-mystic-lavender/10 pb-10 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
+        <footer class="site-footer" data-sticky-cta-hide>
+            <div class="mystic-container py-12">
+                <div class="flex flex-col gap-8 border-b border-mystic-lavender/10 pb-9 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                         <a href="#inicio" class="brand w-fit" aria-label="Diosa Mística, volver al inicio">
                             <span class="brand-mark" aria-hidden="true">☾</span>
@@ -425,32 +340,25 @@
                         </a>
                         <p class="mt-5 max-w-md text-sm leading-6 text-mystic-ivory/55">Una experiencia de introspección inspirada en símbolos y arquetipos. No sustituye orientación médica, psicológica, legal o financiera.</p>
                     </div>
-                    <div>
-                        <h2 class="footer-title">Explora</h2>
-                        <nav class="footer-links" aria-label="Explorar">
-                            <a href="#como-funciona">Cómo funciona</a>
-                            <a href="#lectura">Lectura gratuita</a>
-                            <a href="#tirada">Tirada de muestra</a>
-                        </nav>
-                    </div>
-                    <div>
-                        <h2 class="footer-title">Encuentros</h2>
-                        <nav class="footer-links" aria-label="Encuentros">
-                            <a href="#servicios">Servicios y precios</a>
-                            <a href="#sesion">Sesión en vivo</a>
-                            @auth
-                                <a href="{{ route('dashboard') }}">Mi espacio</a>
-                            @else
-                                <a href="{{ route('login') }}">Acceder</a>
-                            @endauth
-                        </nav>
-                    </div>
+                    <nav class="footer-links" aria-label="Explorar">
+                        <a href="#servicios">Lecturas y precios</a>
+                        <a href="#conocela">Diosa Mística</a>
+                        <a href="#tirada">Tirada de muestra</a>
+                        <a href="#preguntas">Preguntas frecuentes</a>
+                    </nav>
                 </div>
                 <div class="flex flex-col gap-3 pt-7 text-xs text-mystic-ivory/42 sm:flex-row sm:items-center sm:justify-between">
                     <p>© {{ date('Y') }} Diosa Mística. Todos los derechos reservados.</p>
-                    <p>Lectura simbólica · Prototipo sin transacciones</p>
+                    <p>Lectura simbólica · Sin transacciones activas</p>
                 </div>
             </div>
         </footer>
+
+        <div class="mobile-conversion-bar" data-mobile-conversion-bar hidden>
+            <a href="#servicios" class="button button-gold w-full" data-focus-target="services-title" data-conversion-cta="mobile-sticky">
+                Ver lecturas y precios
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
     </body>
 </html>

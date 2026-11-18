@@ -34,6 +34,54 @@ const initializePublicPage = () => {
         });
     });
 
+    const servicesSection = document.querySelector('.services-section');
+
+    if (servicesSection && 'IntersectionObserver' in window) {
+        const catalogObserver = new IntersectionObserver((entries, observer) => {
+            if (!entries.some((entry) => entry.isIntersecting)) {
+                return;
+            }
+
+            servicesSection.classList.add('is-in-view');
+            observer.disconnect();
+        }, { threshold: 0.12 });
+
+        catalogObserver.observe(servicesSection);
+    }
+
+    const conversionHero = document.querySelector('[data-conversion-hero]');
+    const mobileConversionBar = document.querySelector('[data-mobile-conversion-bar]');
+    const stickyCtaHideZones = [...document.querySelectorAll('[data-sticky-cta-hide]')];
+
+    if (conversionHero && mobileConversionBar && stickyCtaHideZones.length > 0 && 'IntersectionObserver' in window) {
+        let heroIsVisible = true;
+        const visibleHideZones = new Set();
+
+        const updateMobileConversionBar = () => {
+            mobileConversionBar.hidden = heroIsVisible || visibleHideZones.size > 0;
+        };
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            heroIsVisible = entries[0].isIntersecting;
+            updateMobileConversionBar();
+        }, { threshold: 0.08 });
+
+        const hideZoneObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    visibleHideZones.add(entry.target);
+                } else {
+                    visibleHideZones.delete(entry.target);
+                }
+            });
+
+            updateMobileConversionBar();
+        }, { threshold: 0.05 });
+
+        heroObserver.observe(conversionHero);
+        stickyCtaHideZones.forEach((zone) => hideZoneObserver.observe(zone));
+    }
+
     const serviceButtons = [...document.querySelectorAll('[data-select-service]')];
     const selectedServiceName = document.querySelector('[data-selected-service-name]');
     const selectedServiceMessage = document.querySelector('[data-selected-service-message]');
@@ -67,59 +115,19 @@ const initializePublicPage = () => {
         });
     }
 
-    const prototypeForm = document.querySelector('[data-prototype-form]');
-
-    if (prototypeForm) {
-        const fullName = prototypeForm.querySelector('#full-name');
-        const email = prototypeForm.querySelector('#email');
-        const status = prototypeForm.querySelector('[data-form-status]');
-
-        const setFieldError = (field, message) => {
-            const error = prototypeForm.querySelector(`[data-error-for="${field.id}"]`);
-
-            field.setAttribute('aria-invalid', message ? 'true' : 'false');
-            error.textContent = message;
-        };
-
-        [fullName, email].forEach((field) => {
-            field.addEventListener('input', () => {
-                setFieldError(field, '');
-                status.classList.remove('is-success');
-                status.textContent = 'Esta demostración no crea una cuenta, un PIN ni una lectura real.';
-            });
-        });
-
-        prototypeForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const nameIsValid = fullName.value.trim().length > 0;
-            const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
-
-            setFieldError(fullName, nameIsValid ? '' : 'Escribe tu nombre para continuar.');
-            setFieldError(email, emailIsValid ? '' : 'Escribe un correo válido, por ejemplo nombre@dominio.com.');
-
-            if (!nameIsValid || !emailIsValid) {
-                (nameIsValid ? email : fullName).focus();
-                status.classList.remove('is-success');
-                status.textContent = 'Revisa los campos indicados. Ningún dato fue enviado.';
-
-                return;
-            }
-
-            status.classList.add('is-success');
-            status.textContent = 'Los datos tienen un formato válido. El prototipo no los guardó ni envió un correo.';
-        });
-    }
-
     const reading = document.querySelector('[data-tarot-reading]');
     const resetButton = document.querySelector('[data-reset-reading]');
+    const readingCta = document.querySelector('[data-reading-cta]');
     const announcement = document.getElementById('card-announcement');
 
-    if (reading && resetButton && announcement) {
+    if (reading && resetButton && readingCta && announcement) {
         const cards = [...reading.querySelectorAll('[data-tarot-card]')];
 
         const updateResetButton = () => {
-            resetButton.disabled = !cards.some((card) => card.classList.contains('is-revealed'));
+            const hasRevealedCard = cards.some((card) => card.classList.contains('is-revealed'));
+
+            resetButton.disabled = !hasRevealedCard;
+            readingCta.hidden = !hasRevealedCard;
         };
 
         cards.forEach((card) => {
