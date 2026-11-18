@@ -13,7 +13,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="landing-page min-h-dvh overflow-x-hidden bg-mystic-ink text-mystic-ivory antialiased" data-landing>
+    <body class="landing-page min-h-dvh overflow-x-hidden bg-mystic-ink text-mystic-ivory antialiased" data-public-page>
         <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
         <header class="site-header">
@@ -35,7 +35,7 @@
                 <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
                     <a href="#como-funciona" class="nav-link">Cómo funciona</a>
                     <a href="#tirada" class="nav-link">Tirada de muestra</a>
-                    <a href="#paquetes" class="nav-link">Paquetes</a>
+                    <a href="#servicios" class="nav-link">Servicios y precios</a>
                     <a href="#sesion" class="nav-link">Sesión en vivo</a>
                 </nav>
 
@@ -50,9 +50,9 @@
                         </a>
                     @endauth
 
-                    <a href="#lectura" class="button button-primary min-h-11 px-4 sm:px-5" data-focus-target="lectura-title">
-                        <span class="sm:hidden">Leer</span>
-                        <span class="hidden sm:inline">Iniciar lectura</span>
+                    <a href="#servicios" class="header-services-cta button button-primary min-h-11 px-4 sm:px-5" data-focus-target="services-title">
+                        <span class="sm:hidden">Servicios</span>
+                        <span class="hidden sm:inline">Ver servicios</span>
                     </a>
 
                     <details class="mobile-menu relative lg:hidden">
@@ -64,7 +64,7 @@
                         <nav class="mobile-menu-panel" aria-label="Navegación móvil">
                             <a href="#como-funciona">Cómo funciona</a>
                             <a href="#tirada">Tirada de muestra</a>
-                            <a href="#paquetes">Paquetes</a>
+                            <a href="#servicios">Servicios y precios</a>
                             <a href="#sesion">Sesión en vivo</a>
                             @auth
                                 <a href="{{ route('dashboard') }}">Mi espacio</a>
@@ -93,17 +93,17 @@
                         </p>
 
                         <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                            <a href="#lectura" class="button button-gold w-full sm:w-auto" data-focus-target="lectura-title">
+                            <a href="#servicios" class="button button-gold w-full sm:w-auto" data-focus-target="services-title">
                                 <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                                     <path d="m12 3 .8 2.5L15.5 6l-2.3 1.5.3 2.7L12 8.4l-1.5 1.8.3-2.7L8.5 6l2.7-.5L12 3ZM5 13l.6 1.7 1.8.3-1.5 1 .2 1.9L5 16.6l-1.1 1.3.2-1.9-1.5-1 1.8-.3L5 13Zm13 1 .7 2.2 2.3.4-1.9 1.3.3 2.3-1.4-1.7-1.4 1.7.3-2.3-1.9-1.3 2.3-.4L18 14Z" />
                                 </svg>
-                                Obtener mi lectura gratis
+                                Ver servicios y precios
                             </a>
                             <span class="inline-flex items-center gap-2 text-xs font-semibold text-mystic-lavender/80">
                                 <svg viewBox="0 0 24 24" class="size-4 text-mystic-gold" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
                                     <path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10M6 10h12v10H6V10Z" />
                                 </svg>
-                                Una lectura por correo verificado
+                                Tres lecturas · precios claros en USD
                             </span>
                         </div>
 
@@ -117,12 +117,12 @@
                                 </span>
                                 <span aria-hidden="true">↗</span>
                             </a>
-                            <a href="#paquetes" class="hero-access-card">
+                            <a href="#servicios" class="hero-access-card">
                                 <span class="access-icon" aria-hidden="true">✧</span>
                                 <span>
-                                    <span class="access-label">Oráculo virtual</span>
-                                    <strong>Lecturas virtuales</strong>
-                                    <small>Explora los paquetes simbólicos</small>
+                                    <span class="access-label">Catálogo de lecturas</span>
+                                    <strong>Servicios de lectura</strong>
+                                    <small>Compara opciones y precios</small>
                                 </span>
                                 <span aria-hidden="true">↗</span>
                             </a>
@@ -328,52 +328,62 @@
                 </div>
             </section>
 
-            <section id="paquetes" class="scroll-mt-20 bg-mystic-ink py-20 sm:py-28" aria-labelledby="packages-title">
+            <section id="servicios" class="scroll-mt-20 bg-mystic-ink py-20 sm:py-28" aria-labelledby="services-title">
                 <div class="mystic-container">
                     <div class="section-heading">
-                        <p class="eyebrow justify-center">Expansión astral</p>
-                        <h2 id="packages-title">Paquetes de lecturas virtuales</h2>
-                        <p>Opciones ilustrativas para futuras consultas. Los contenidos y valores se definirán antes de activar cualquier compra.</p>
+                        <p class="eyebrow justify-center">Elige tu lectura</p>
+                        <h2 id="services-title" tabindex="-1">Servicios y precios</h2>
+                        <p>Tres formas de recibir orientación simbólica, con precios claros en dólares estadounidenses.</p>
                     </div>
 
                     <div class="mt-12 grid items-stretch gap-5 lg:grid-cols-3">
-                        <article class="package-card">
-                            <p class="package-label">Para comenzar</p>
-                            <h3>Pack de consultas</h3>
-                            <p class="package-price">Precio por definir</p>
-                            <ul>
-                                <li>✦ Consultas virtuales de muestra</li>
-                                <li>✦ Acceso mediante PIN en una fase futura</li>
-                                <li>✦ Condiciones por confirmar</li>
-                            </ul>
-                            <button type="button" class="button button-secondary mt-auto w-full" disabled>Próximamente</button>
-                        </article>
+                        @foreach ($readingServices as $readingService)
+                            @php($price = 'US$'.number_format($readingService['price_cents'] / 100, 0))
 
-                        <article class="package-card package-featured">
-                            <span class="package-badge">Más elegido</span>
-                            <p class="package-label">Acompañamiento</p>
-                            <h3>Pack lunar</h3>
-                            <p class="package-price">Precio por definir</p>
-                            <ul>
-                                <li>✦ Consultas virtuales de muestra</li>
-                                <li>✦ Historial privado en una fase futura</li>
-                                <li>✦ Condiciones por confirmar</li>
-                            </ul>
-                            <button type="button" class="button button-gold mt-auto w-full" disabled>Próximamente</button>
-                        </article>
+                            <article class="service-card" data-service-card>
+                                <p class="service-label">{{ $readingService['eyebrow'] }}</p>
+                                <h3>{{ $readingService['name'] }}</h3>
+                                <p class="service-price">{{ $price }}</p>
+                                <p class="service-description">{{ $readingService['summary'] }}</p>
 
-                        <article class="package-card">
-                            <p class="package-label">Ciclo anual</p>
-                            <h3>Acceso infinito</h3>
-                            <p class="package-price">Precio por definir</p>
-                            <ul>
-                                <li>✦ Modalidad todavía por validar</li>
-                                <li>✦ Recursos complementarios por definir</li>
-                                <li>✦ Condiciones por confirmar</li>
-                            </ul>
-                            <button type="button" class="button button-secondary mt-auto w-full" disabled>Próximamente</button>
-                        </article>
+                                @isset($readingService['status'])
+                                    <p class="service-status">{{ $readingService['status'] }}</p>
+                                @endisset
+
+                                <div class="mt-auto grid gap-3 pt-7">
+                                    <a href="{{ route('services.show', $readingService['slug']) }}" class="service-detail-link">
+                                        Ver detalles
+                                        <span aria-hidden="true">↗</span>
+                                    </a>
+                                    <button
+                                        type="button"
+                                        class="button button-secondary w-full"
+                                        data-select-service
+                                        data-service-name="{{ $readingService['name'] }}"
+                                        data-service-price="{{ $price }}"
+                                        aria-pressed="false"
+                                    >
+                                        Elegir esta lectura
+                                    </button>
+                                </div>
+                            </article>
+                        @endforeach
                     </div>
+
+                    <aside class="service-selection" aria-labelledby="selected-service-title">
+                        <div>
+                            <p class="service-label">Tu elección</p>
+                            <h3 id="selected-service-title" data-selected-service-name>Selecciona una lectura</h3>
+                            <p data-selected-service-message>Compara las opciones y elige la que mejor se ajuste a tu consulta.</p>
+                        </div>
+                        <div class="service-selection-price" data-selected-service-details hidden>
+                            <strong data-selected-service-price></strong>
+                            <span>Reservas en línea próximamente</span>
+                        </div>
+                        <p class="sr-only" data-service-announcement aria-live="polite"></p>
+                    </aside>
+
+                    <p class="payment-note">Métodos previstos para las reservas: PayPal y transferencias a Banco BHD, Banco Popular o Banreservas</p>
                 </div>
             </section>
 
@@ -382,22 +392,23 @@
                     <div class="live-panel">
                         <div>
                             <p class="eyebrow">Encuentro personal</p>
-                            <h2 id="live-title" class="mt-3 font-mystic text-4xl leading-none font-medium text-mystic-ivory sm:text-5xl">Agenda tu sesión en vivo con Diosa Mística</h2>
-                            <p class="mt-5 max-w-2xl text-sm leading-7 text-mystic-ivory/68 sm:text-base">Un espacio íntimo por videollamada para explorar tus preguntas con calma. La agenda real y las condiciones se publicarán en una próxima fase.</p>
+                            <h2 id="live-title" class="mt-3 font-mystic text-4xl leading-none font-medium text-mystic-ivory sm:text-5xl">Lectura general en vivo con Diosa Mística</h2>
+                            <p class="mt-5 max-w-2xl text-sm leading-7 text-mystic-ivory/68 sm:text-base">Un encuentro individual por Google Meet para explorar tus preguntas con calma y recibir orientación simbólica.</p>
                             <ul class="mt-6 grid gap-3 text-sm text-mystic-lavender sm:grid-cols-2">
                                 <li>✦ Acompañamiento uno a uno</li>
-                                <li>✦ Duración por confirmar</li>
-                                <li>✦ Modalidad por videollamada</li>
-                                <li>✦ Sin reservas activas en el prototipo</li>
+                                <li>✦ Duración de 20–25 minutos</li>
+                                <li>✦ Encuentro por Google Meet</li>
+                                <li>✦ US$87</li>
                             </ul>
                         </div>
 
                         <aside class="schedule-card" aria-label="Disponibilidad de sesiones">
                             <span class="schedule-icon" aria-hidden="true">☾</span>
-                            <p class="eyebrow justify-center">Próxima disponibilidad</p>
-                            <h3>Horarios por publicar</h3>
-                            <p>Estamos preparando la agenda. Este módulo no permite reservar ni recopila datos todavía.</p>
-                            <button type="button" class="button button-gold w-full" disabled>Reservas próximamente</button>
+                            <p class="eyebrow justify-center">Encuentro personal</p>
+                            <h3>Conoce la lectura general</h3>
+                            <p>Revisa los detalles o vuelve al catálogo para seleccionar esta lectura. Las reservas aún no están activas.</p>
+                            <a href="{{ route('services.show', 'general') }}" class="button button-gold w-full">Ver detalles</a>
+                            <a href="#servicios" class="button button-secondary mt-3 w-full" data-focus-target="services-title">Ver servicios y precios</a>
                         </aside>
                     </div>
                 </div>
@@ -425,7 +436,7 @@
                     <div>
                         <h2 class="footer-title">Encuentros</h2>
                         <nav class="footer-links" aria-label="Encuentros">
-                            <a href="#paquetes">Paquetes virtuales</a>
+                            <a href="#servicios">Servicios y precios</a>
                             <a href="#sesion">Sesión en vivo</a>
                             @auth
                                 <a href="{{ route('dashboard') }}">Mi espacio</a>

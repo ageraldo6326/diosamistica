@@ -731,42 +731,32 @@ select:focus[data-flux-control] {
         font-weight: 600;
     }
 
-    .package-card {
+    .service-card {
         position: relative;
         display: flex;
-        min-height: 27rem;
+        min-height: 25rem;
         flex-direction: column;
         border: 1px solid rgb(216 193 250 / 0.09);
         border-radius: 1.4rem;
         background: var(--color-mystic-panel);
         padding: 1.6rem;
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
     }
 
-    .package-featured {
+    .service-card:hover {
+        border-color: rgb(216 193 250 / 0.25);
+        transform: translateY(-0.2rem);
+    }
+
+    .service-card.is-selected {
         border-color: rgb(244 203 141 / 0.55);
         background:
             radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.1), transparent 12rem),
             var(--color-mystic-panel);
-        box-shadow: 0 22px 55px rgb(0 0 0 / 0.2);
+        box-shadow: 0 22px 55px rgb(0 0 0 / 0.2), 0 0 0 2px rgb(244 203 141 / 0.08);
     }
 
-    .package-badge {
-        position: absolute;
-        inset-block-start: 0;
-        inset-inline-start: 50%;
-        translate: -50% -50%;
-        border-radius: 999px;
-        background: var(--color-mystic-gold);
-        padding: 0.35rem 0.8rem;
-        color: var(--color-mystic-ink);
-        font-size: 0.52rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        white-space: nowrap;
-    }
-
-    .package-label {
+    .service-label {
         color: var(--color-mystic-gold);
         font-size: 0.57rem;
         font-weight: 700;
@@ -774,28 +764,250 @@ select:focus[data-flux-control] {
         text-transform: uppercase;
     }
 
-    .package-card h3 {
+    .service-card h3 {
         margin-block-start: 0.65rem;
         font-family: var(--font-mystic);
         font-size: 1.8rem;
         font-weight: 600;
+        line-height: 1.05;
         color: var(--color-mystic-ivory);
     }
 
-    .package-price {
-        margin-block-start: 0.8rem;
+    .service-price {
+        margin-block-start: 1.1rem;
+        color: var(--color-mystic-gold);
+        font-family: var(--font-mystic);
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .service-description {
+        margin-block-start: 1rem;
+        color: rgb(244 235 224 / 0.64);
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    .service-status {
+        margin-block-start: 1rem;
+        width: fit-content;
+        border: 1px solid rgb(244 203 141 / 0.3);
+        border-radius: 999px;
+        background: rgb(244 203 141 / 0.07);
+        padding: 0.45rem 0.7rem;
+        color: var(--color-mystic-gold);
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+    }
+
+    .service-detail-link,
+    .service-back-link {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 0.5rem;
         color: var(--color-mystic-lavender);
-        font-size: 1rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 0.3rem;
+        transition: color 180ms ease, text-decoration-color 180ms ease;
+    }
+
+    .service-detail-link:hover,
+    .service-detail-link:focus-visible,
+    .service-back-link:hover,
+    .service-back-link:focus-visible {
+        color: var(--color-mystic-ivory);
+        outline: none;
+        text-decoration-color: var(--color-mystic-gold);
+    }
+
+    .service-selection {
+        display: grid;
+        gap: 1.4rem;
+        margin-block-start: 1.5rem;
+        border: 1px solid rgb(216 193 250 / 0.12);
+        border-radius: 1.4rem;
+        background: rgb(7 10 30 / 0.58);
+        padding: clamp(1.3rem, 4vw, 2rem);
+    }
+
+    .service-selection h3 {
+        margin-block-start: 0.5rem;
+        color: var(--color-mystic-ivory);
+        font-family: var(--font-mystic);
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.1;
+    }
+
+    .service-selection p:not(.service-label) {
+        margin-block-start: 0.5rem;
+        color: rgb(244 235 224 / 0.6);
+        font-size: 0.78rem;
+        line-height: 1.6;
+    }
+
+    .service-selection-price {
+        display: grid;
+        gap: 0.25rem;
+    }
+
+    .service-selection-price[hidden] {
+        display: none;
+    }
+
+    .service-selection-price strong {
+        color: var(--color-mystic-gold);
+        font-family: var(--font-mystic);
+        font-size: 2rem;
+        line-height: 1;
+    }
+
+    .service-selection-price span {
+        color: var(--color-mystic-lavender);
+        font-size: 0.74rem;
         font-weight: 700;
     }
 
-    .package-card ul {
+    .payment-note {
+        max-width: 51rem;
+        margin: 1.4rem auto 0;
+        color: rgb(244 235 224 / 0.45);
+        font-size: 0.7rem;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .service-detail-hero {
+        position: relative;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 82% 32%, rgb(216 193 250 / 0.13), transparent 25rem),
+            radial-gradient(circle at 15% 80%, rgb(244 203 141 / 0.05), transparent 20rem);
+    }
+
+    .service-detail-hero::after {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgb(244 235 224 / 0.16) 0.6px, transparent 0.6px);
+        background-size: 32px 32px;
+        content: '';
+        mask-image: linear-gradient(to bottom, black, transparent 82%);
+        pointer-events: none;
+    }
+
+    .service-detail-card {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        border: 1px solid rgb(244 203 141 / 0.25);
+        border-radius: 1.8rem;
+        background:
+            radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.12), transparent 16rem),
+            var(--color-mystic-panel);
+        padding: clamp(1.5rem, 5vw, 3rem);
+        box-shadow: 0 30px 80px rgb(0 0 0 / 0.25);
+    }
+
+    .service-detail-symbol {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-block-end: 3rem;
+        color: var(--color-mystic-gold);
+        font-family: var(--font-mystic);
+        font-size: 2.4rem;
+    }
+
+    .service-detail-symbol span:nth-child(2) {
         display: grid;
-        gap: 0.8rem;
-        margin-block: 1.6rem 2rem;
-        color: rgb(244 235 224 / 0.64);
-        font-size: 0.75rem;
+        width: 6rem;
+        height: 6rem;
+        place-items: center;
+        border: 1px solid rgb(244 203 141 / 0.35);
+        border-radius: 50%;
+        box-shadow: 0 0 50px rgb(244 203 141 / 0.12);
+    }
+
+    .service-detail-price {
+        margin-block-start: 0.5rem;
+        color: var(--color-mystic-ivory);
+        font-family: var(--font-mystic);
+        font-size: clamp(3.2rem, 10vw, 5.4rem);
+        font-weight: 600;
+        line-height: 0.9;
+    }
+
+    .service-detail-list {
+        display: grid;
+        gap: 0.9rem;
+        margin-block-start: 2rem;
+        border-block: 1px solid rgb(216 193 250 / 0.11);
+        padding-block: 1.5rem;
+        color: rgb(244 235 224 / 0.72);
+        font-size: 0.84rem;
         line-height: 1.5;
+    }
+
+    .service-detail-list span {
+        margin-inline-end: 0.4rem;
+        color: var(--color-mystic-gold);
+    }
+
+    .service-detail-note {
+        margin-block-start: 1.25rem;
+        color: rgb(244 235 224 / 0.43);
+        font-size: 0.68rem;
+        line-height: 1.6;
+    }
+
+    .service-related-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: 1px solid rgb(216 193 250 / 0.1);
+        border-radius: 1.2rem;
+        background: var(--color-mystic-panel);
+        padding: 1.3rem;
+        transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .service-related-card:hover,
+    .service-related-card:focus-visible {
+        border-color: rgb(244 203 141 / 0.4);
+        outline: none;
+        transform: translateY(-0.15rem);
+    }
+
+    .service-related-card > span {
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    .service-related-card small {
+        color: var(--color-mystic-gold);
+        font-size: 0.54rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .service-related-card strong {
+        color: var(--color-mystic-ivory);
+        font-family: var(--font-mystic);
+        font-size: 1.35rem;
+        line-height: 1.05;
+    }
+
+    .service-related-card b {
+        color: var(--color-mystic-lavender);
+        font-size: 0.82rem;
     }
 
     .live-panel {
@@ -901,8 +1113,9 @@ select:focus[data-flux-control] {
         align-items: stretch;
     }
 
-    .package-featured {
-        transform: translateY(-0.75rem);
+    .service-selection {
+        grid-template-columns: 1fr auto;
+        align-items: center;
     }
 }
 
@@ -922,6 +1135,12 @@ select:focus[data-flux-control] {
 
     .deck-card {
         width: 12rem;
+    }
+}
+
+@media (max-width: 30rem) {
+    .header-services-cta {
+        display: none;
     }
 }
 

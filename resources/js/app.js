@@ -1,7 +1,7 @@
-const initializeLandingPage = () => {
-    const landingPage = document.querySelector('[data-landing]');
+const initializePublicPage = () => {
+    const publicPage = document.querySelector('[data-public-page]');
 
-    if (!landingPage) {
+    if (!publicPage) {
         return;
     }
 
@@ -33,6 +33,39 @@ const initializeLandingPage = () => {
             link.closest('details')?.removeAttribute('open');
         });
     });
+
+    const serviceButtons = [...document.querySelectorAll('[data-select-service]')];
+    const selectedServiceName = document.querySelector('[data-selected-service-name]');
+    const selectedServiceMessage = document.querySelector('[data-selected-service-message]');
+    const selectedServiceDetails = document.querySelector('[data-selected-service-details]');
+    const selectedServicePrice = document.querySelector('[data-selected-service-price]');
+    const serviceAnnouncement = document.querySelector('[data-service-announcement]');
+
+    if (
+        serviceButtons.length > 0
+        && selectedServiceName
+        && selectedServiceMessage
+        && selectedServiceDetails
+        && selectedServicePrice
+        && serviceAnnouncement
+    ) {
+        serviceButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                serviceButtons.forEach((serviceButton) => {
+                    serviceButton.setAttribute('aria-pressed', 'false');
+                    serviceButton.closest('[data-service-card]')?.classList.remove('is-selected');
+                });
+
+                button.setAttribute('aria-pressed', 'true');
+                button.closest('[data-service-card]')?.classList.add('is-selected');
+                selectedServiceName.textContent = button.dataset.serviceName;
+                selectedServiceMessage.textContent = 'Has elegido esta opción. Podrás cambiarla antes de que se habiliten las reservas.';
+                selectedServicePrice.textContent = button.dataset.servicePrice;
+                selectedServiceDetails.hidden = false;
+                serviceAnnouncement.textContent = `${button.dataset.serviceName}, ${button.dataset.servicePrice}, seleccionada. Reservas en línea próximamente.`;
+            });
+        });
+    }
 
     const prototypeForm = document.querySelector('[data-prototype-form]');
 
@@ -127,7 +160,7 @@ const initializeLandingPage = () => {
 };
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeLandingPage);
+    document.addEventListener('DOMContentLoaded', initializePublicPage);
 } else {
-    initializeLandingPage();
+    initializePublicPage();
 }
