@@ -1,0 +1,973 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source "../views";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mystic: 'Cormorant Garamond', ui-serif, Georgia, serif;
+
+    --color-mystic-ink: #0d1024;
+    --color-mystic-section: #12162c;
+    --color-mystic-panel: #191d35;
+    --color-mystic-panel-light: #202541;
+    --color-mystic-ivory: #f4ebe0;
+    --color-mystic-gold: #f4cb8d;
+    --color-mystic-gold-soft: #e8b86f;
+    --color-mystic-lavender: #d8c1fa;
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field] {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+@layer components {
+    .landing-page {
+        font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+        background-image:
+            radial-gradient(circle at 76% 8%, rgb(88 73 142 / 0.13), transparent 25rem),
+            radial-gradient(circle at 7% 21%, rgb(244 203 141 / 0.04), transparent 17rem);
+    }
+
+    .mystic-container {
+        width: min(100% - 2rem, 75rem);
+        margin-inline: auto;
+    }
+
+    .skip-link {
+        position: fixed;
+        z-index: 100;
+        inset-block-start: 0.75rem;
+        inset-inline-start: 0.75rem;
+        translate: 0 -180%;
+        border-radius: 999px;
+        background: var(--color-mystic-gold);
+        padding: 0.7rem 1rem;
+        color: var(--color-mystic-ink);
+        font-size: 0.8rem;
+        font-weight: 700;
+        transition: translate 180ms ease;
+    }
+
+    .skip-link:focus {
+        translate: 0;
+    }
+
+    .site-header {
+        position: sticky;
+        z-index: 50;
+        inset-block-start: 0;
+        border-block-end: 1px solid rgb(216 193 250 / 0.09);
+        background: rgb(13 16 36 / 0.86);
+        backdrop-filter: blur(20px);
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+        color: var(--color-mystic-gold);
+    }
+
+    .brand-mark {
+        display: grid;
+        width: 2.5rem;
+        height: 2.5rem;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--color-mystic-gold);
+    }
+
+    .nav-link {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        border-radius: 999px;
+        padding-inline: 1rem;
+        color: rgb(244 235 224 / 0.68);
+        font-size: 0.78rem;
+        font-weight: 600;
+        transition: color 180ms ease, background-color 180ms ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+        background: rgb(216 193 250 / 0.08);
+        color: var(--color-mystic-ivory);
+        outline: none;
+    }
+
+    .button {
+        display: inline-flex;
+        min-height: 3rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 0.78rem 1.35rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: center;
+        transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .button:focus-visible,
+    .icon-button:focus-visible,
+    .tarot-card-button:focus-visible {
+        outline: 2px solid var(--color-mystic-gold);
+        outline-offset: 4px;
+    }
+
+    .button:disabled {
+        cursor: not-allowed;
+        opacity: 0.52;
+    }
+
+    .button-primary {
+        border-color: rgb(216 193 250 / 0.24);
+        background: rgb(216 193 250 / 0.12);
+        color: var(--color-mystic-ivory);
+    }
+
+    .button-primary:hover {
+        background: rgb(216 193 250 / 0.2);
+    }
+
+    .button-gold {
+        border-color: #ffe6b9;
+        background: linear-gradient(135deg, #ffe0ac, var(--color-mystic-gold));
+        color: #24192b;
+        box-shadow: 0 10px 30px rgb(244 203 141 / 0.15);
+    }
+
+    .button-gold:hover:not(:disabled) {
+        box-shadow: 0 13px 34px rgb(244 203 141 / 0.25);
+    }
+
+    .button-secondary {
+        border-color: rgb(216 193 250 / 0.2);
+        background: rgb(216 193 250 / 0.06);
+        color: var(--color-mystic-lavender);
+    }
+
+    .button-secondary:hover:not(:disabled) {
+        border-color: rgb(244 203 141 / 0.45);
+        color: var(--color-mystic-ivory);
+    }
+
+    .icon-button {
+        display: grid;
+        width: 2.75rem;
+        height: 2.75rem;
+        cursor: pointer;
+        list-style: none;
+        place-items: center;
+        border: 1px solid rgb(216 193 250 / 0.18);
+        border-radius: 999px;
+        color: var(--color-mystic-ivory);
+    }
+
+    .icon-button::-webkit-details-marker {
+        display: none;
+    }
+
+    .mobile-menu-panel {
+        position: absolute;
+        inset-block-start: calc(100% + 0.75rem);
+        inset-inline-end: 0;
+        display: grid;
+        width: min(18rem, calc(100vw - 2rem));
+        gap: 0.25rem;
+        border: 1px solid rgb(216 193 250 / 0.14);
+        border-radius: 1.25rem;
+        background: #171b34;
+        padding: 0.6rem;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
+    }
+
+    .mobile-menu-panel a {
+        display: flex;
+        min-height: 2.75rem;
+        align-items: center;
+        border-radius: 0.8rem;
+        padding-inline: 0.9rem;
+        color: rgb(244 235 224 / 0.76);
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .mobile-menu-panel a:hover,
+    .mobile-menu-panel a:focus-visible {
+        background: rgb(216 193 250 / 0.08);
+        color: var(--color-mystic-ivory);
+        outline: none;
+    }
+
+    .hero-section {
+        position: relative;
+        isolation: isolate;
+        min-height: calc(100svh - 4.5rem);
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background-image:
+            radial-gradient(circle at 8% 16%, rgb(244 203 141 / 0.72) 0 1px, transparent 1.5px),
+            radial-gradient(circle at 92% 24%, rgb(216 193 250 / 0.7) 0 1px, transparent 1.5px),
+            radial-gradient(circle at 68% 62%, rgb(244 203 141 / 0.35) 0 1px, transparent 1.5px);
+        background-size: 16rem 16rem, 22rem 22rem, 19rem 19rem;
+        content: '';
+        opacity: 0.45;
+    }
+
+    .hero-copy {
+        animation: landing-rise 350ms ease-out both;
+    }
+
+    .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        color: var(--color-mystic-gold);
+        font-size: 0.63rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        line-height: 1.4;
+        text-transform: uppercase;
+    }
+
+    .hero-access-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 0.8rem;
+        min-height: 5.4rem;
+        border: 1px solid rgb(216 193 250 / 0.09);
+        border-radius: 1.1rem;
+        background: rgb(25 29 53 / 0.68);
+        padding: 0.9rem;
+        transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    }
+
+    .hero-access-card:hover,
+    .hero-access-card:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgb(244 203 141 / 0.28);
+        background: rgb(32 37 65 / 0.85);
+        outline: none;
+    }
+
+    .hero-access-card strong,
+    .hero-access-card small,
+    .hero-access-card .access-label {
+        display: block;
+    }
+
+    .hero-access-card strong {
+        margin-block-start: 0.2rem;
+        font-family: var(--font-mystic);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--color-mystic-ivory);
+    }
+
+    .hero-access-card small {
+        margin-block-start: 0.15rem;
+        color: rgb(244 235 224 / 0.5);
+        font-size: 0.62rem;
+    }
+
+    .access-label {
+        color: var(--color-mystic-gold);
+        font-size: 0.5rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .access-icon {
+        display: grid;
+        width: 2.3rem;
+        height: 2.3rem;
+        place-items: center;
+        border-radius: 50%;
+        background: rgb(216 193 250 / 0.08);
+        color: var(--color-mystic-gold);
+    }
+
+    .hero-deck {
+        position: relative;
+        display: grid;
+        min-height: 28rem;
+        place-items: center;
+        perspective: 1000px;
+        animation: landing-rise 350ms 80ms ease-out both;
+    }
+
+    .deck-halo {
+        position: absolute;
+        width: min(90vw, 30rem);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(137 102 195 / 0.26), rgb(90 69 137 / 0.08) 45%, transparent 70%);
+        filter: blur(4px);
+        animation: halo-breathe 5s ease-in-out 1 both;
+    }
+
+    .deck-card {
+        position: absolute;
+        display: flex;
+        width: clamp(11rem, 44vw, 15.5rem);
+        aspect-ratio: 0.63;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        border: 1px solid rgb(216 193 250 / 0.18);
+        border-radius: 1.35rem;
+        background:
+            linear-gradient(135deg, rgb(216 193 250 / 0.04), transparent 35%),
+            #181c35;
+        padding: 1.15rem;
+        box-shadow: 0 35px 65px rgb(0 0 0 / 0.4), inset 0 0 0 0.3rem rgb(13 16 36 / 0.28);
+        color: var(--color-mystic-gold);
+    }
+
+    .deck-card::before,
+    .tarot-face::before {
+        position: absolute;
+        inset: 0.5rem;
+        border: 1px solid rgb(244 203 141 / 0.13);
+        border-radius: 0.95rem;
+        content: '';
+        pointer-events: none;
+    }
+
+    .deck-card-left {
+        transform: translateX(-25%) rotate(-13deg) translateZ(-3rem);
+    }
+
+    .deck-card-right {
+        transform: translateX(25%) rotate(13deg) translateZ(-3rem);
+    }
+
+    .deck-card-main {
+        z-index: 2;
+        align-items: center;
+        transform: translateY(-0.6rem);
+    }
+
+    .card-orbit {
+        display: grid;
+        width: 7.5rem;
+        height: 7.5rem;
+        place-items: center;
+        border: 1px solid rgb(216 193 250 / 0.12);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(216 193 250 / 0.11), transparent 67%);
+        color: var(--color-mystic-gold);
+    }
+
+    .orbit-star {
+        position: absolute;
+        translate: 0 -4.7rem;
+        color: var(--color-mystic-lavender);
+    }
+
+    .section-shell {
+        border-block: 1px solid rgb(216 193 250 / 0.035);
+        background: var(--color-mystic-section);
+    }
+
+    .section-heading {
+        max-width: 45rem;
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    .section-heading h2 {
+        margin-block-start: 0.7rem;
+        font-family: var(--font-mystic);
+        font-size: clamp(2.35rem, 7vw, 4rem);
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 0.98;
+        color: var(--color-mystic-ivory);
+    }
+
+    .section-heading > p:last-child {
+        margin: 1rem auto 0;
+        max-width: 40rem;
+        color: rgb(244 235 224 / 0.62);
+        font-size: 0.88rem;
+        line-height: 1.7;
+    }
+
+    .step-card {
+        display: flex;
+        min-height: 17rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgb(216 193 250 / 0.07);
+        border-radius: 1.8rem;
+        background: var(--color-mystic-panel);
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .step-number {
+        display: grid;
+        width: 3rem;
+        height: 3rem;
+        place-items: center;
+        border: 1px solid rgb(244 203 141 / 0.28);
+        border-radius: 50%;
+        background: rgb(244 203 141 / 0.06);
+        color: var(--color-mystic-gold);
+        font-family: var(--font-mystic);
+        font-size: 1.25rem;
+    }
+
+    .step-card h3 {
+        margin-block-start: 1.2rem;
+        font-family: var(--font-mystic);
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--color-mystic-ivory);
+    }
+
+    .step-card > p {
+        margin-block-start: 0.75rem;
+        color: rgb(244 235 224 / 0.6);
+        font-size: 0.78rem;
+        line-height: 1.65;
+    }
+
+    .step-note {
+        margin-block-start: 1.1rem;
+        color: var(--color-mystic-lavender);
+        font-size: 0.62rem;
+        font-weight: 600;
+    }
+
+    .reading-panel {
+        position: relative;
+        border: 1px solid rgb(216 193 250 / 0.1);
+        border-radius: 1.5rem;
+        background:
+            radial-gradient(circle at 50% 0, rgb(216 193 250 / 0.08), transparent 15rem),
+            var(--color-mystic-panel);
+        padding: clamp(1.25rem, 5vw, 3rem);
+        box-shadow: 0 28px 80px rgb(0 0 0 / 0.2);
+    }
+
+    .panel-sigil {
+        display: grid;
+        width: 3rem;
+        height: 3rem;
+        margin: -0.25rem auto 1.1rem;
+        place-items: center;
+        border: 1px solid rgb(244 203 141 / 0.2);
+        border-radius: 50%;
+        color: var(--color-mystic-gold);
+    }
+
+    .form-field {
+        display: grid;
+        gap: 0.45rem;
+    }
+
+    .form-field label {
+        color: var(--color-mystic-lavender);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .input-wrap {
+        display: flex;
+        min-height: 3.25rem;
+        align-items: center;
+        gap: 0.75rem;
+        border: 1px solid rgb(216 193 250 / 0.13);
+        border-radius: 0.9rem;
+        background: rgb(7 10 30 / 0.72);
+        padding-inline: 1rem;
+        color: rgb(216 193 250 / 0.55);
+        transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .input-wrap:focus-within {
+        border-color: rgb(244 203 141 / 0.65);
+        box-shadow: 0 0 0 3px rgb(244 203 141 / 0.08);
+    }
+
+    .input-wrap:has(input[aria-invalid='true']) {
+        border-color: #f4a5a5;
+    }
+
+    .input-wrap input {
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        color: var(--color-mystic-ivory);
+        font-size: 0.9rem;
+        outline: none;
+    }
+
+    .input-wrap input::placeholder {
+        color: rgb(216 193 250 / 0.32);
+    }
+
+    .field-error {
+        min-height: 1.1rem;
+        color: #ffc0c0;
+        font-size: 0.7rem;
+    }
+
+    .prototype-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        color: rgb(244 235 224 / 0.48);
+        font-size: 0.66rem;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .prototype-status.is-success {
+        color: #cce6c7;
+    }
+
+    .tarot-reading-card {
+        min-width: 0;
+    }
+
+    .tarot-card-button {
+        display: block;
+        width: 100%;
+        max-width: 19rem;
+        aspect-ratio: 0.68;
+        margin-inline: auto;
+        border-radius: 1.4rem;
+        perspective: 1200px;
+        text-align: initial;
+    }
+
+    .tarot-card-inner {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 520ms cubic-bezier(0.2, 0.75, 0.2, 1);
+    }
+
+    .tarot-reading-card.is-revealed .tarot-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .tarot-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+        border: 1px solid rgb(216 193 250 / 0.16);
+        border-radius: 1.4rem;
+        padding: 1.25rem;
+        backface-visibility: hidden;
+        box-shadow: 0 22px 45px rgb(0 0 0 / 0.26);
+    }
+
+    .tarot-back {
+        background:
+            radial-gradient(circle at 50% 45%, rgb(216 193 250 / 0.1), transparent 28%),
+            linear-gradient(145deg, #202541, #161a33);
+        color: var(--color-mystic-gold);
+    }
+
+    .tarot-front {
+        transform: rotateY(180deg);
+        background:
+            radial-gradient(circle at 50% 35%, rgb(244 203 141 / 0.18), transparent 31%),
+            linear-gradient(155deg, #292340, #151a32 62%);
+        color: var(--color-mystic-ivory);
+        text-align: center;
+    }
+
+    .tarot-meta {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--color-mystic-gold);
+        font-size: 0.54rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .tarot-emblem {
+        display: grid;
+        width: 5.4rem;
+        height: 5.4rem;
+        place-items: center;
+        border: 1px solid rgb(216 193 250 / 0.12);
+        border-radius: 50%;
+        background: rgb(216 193 250 / 0.06);
+        color: var(--color-mystic-gold);
+        font-family: var(--font-mystic);
+        font-size: 2.2rem;
+    }
+
+    .tarot-prompt {
+        color: var(--color-mystic-ivory);
+        font-family: var(--font-mystic);
+        font-size: 1.25rem;
+    }
+
+    .tarot-front strong {
+        font-family: var(--font-mystic);
+        font-size: 1.65rem;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .tarot-keyword,
+    .tarot-brand {
+        color: rgb(216 193 250 / 0.6);
+        font-size: 0.52rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .tarot-interpretation {
+        max-width: 19rem;
+        min-height: 9.3rem;
+        margin: 1.2rem auto 0;
+        border-inline-start: 1px solid rgb(244 203 141 / 0.32);
+        padding: 0.2rem 0 0.2rem 1rem;
+        color: rgb(244 235 224 / 0.63);
+        font-size: 0.76rem;
+        line-height: 1.65;
+        animation: interpretation-in 240ms ease-out both;
+    }
+
+    .tarot-interpretation strong {
+        display: block;
+        margin-block-start: 0.75rem;
+        color: var(--color-mystic-lavender);
+        font-weight: 600;
+    }
+
+    .package-card {
+        position: relative;
+        display: flex;
+        min-height: 27rem;
+        flex-direction: column;
+        border: 1px solid rgb(216 193 250 / 0.09);
+        border-radius: 1.4rem;
+        background: var(--color-mystic-panel);
+        padding: 1.6rem;
+    }
+
+    .package-featured {
+        border-color: rgb(244 203 141 / 0.55);
+        background:
+            radial-gradient(circle at 50% 0, rgb(244 203 141 / 0.1), transparent 12rem),
+            var(--color-mystic-panel);
+        box-shadow: 0 22px 55px rgb(0 0 0 / 0.2);
+    }
+
+    .package-badge {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-start: 50%;
+        translate: -50% -50%;
+        border-radius: 999px;
+        background: var(--color-mystic-gold);
+        padding: 0.35rem 0.8rem;
+        color: var(--color-mystic-ink);
+        font-size: 0.52rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .package-label {
+        color: var(--color-mystic-gold);
+        font-size: 0.57rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .package-card h3 {
+        margin-block-start: 0.65rem;
+        font-family: var(--font-mystic);
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--color-mystic-ivory);
+    }
+
+    .package-price {
+        margin-block-start: 0.8rem;
+        color: var(--color-mystic-lavender);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .package-card ul {
+        display: grid;
+        gap: 0.8rem;
+        margin-block: 1.6rem 2rem;
+        color: rgb(244 235 224 / 0.64);
+        font-size: 0.75rem;
+        line-height: 1.5;
+    }
+
+    .live-panel {
+        display: grid;
+        gap: 2rem;
+        border: 1px solid rgb(216 193 250 / 0.1);
+        border-radius: 1.8rem;
+        background:
+            radial-gradient(circle at 0 0, rgb(216 193 250 / 0.08), transparent 22rem),
+            var(--color-mystic-panel);
+        padding: clamp(1.35rem, 5vw, 3.4rem);
+    }
+
+    .schedule-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgb(216 193 250 / 0.09);
+        border-radius: 1.3rem;
+        background: rgb(7 10 30 / 0.58);
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .schedule-icon {
+        display: grid;
+        width: 3.4rem;
+        height: 3.4rem;
+        margin-block-end: 1.3rem;
+        place-items: center;
+        border: 1px solid rgb(244 203 141 / 0.18);
+        border-radius: 50%;
+        color: var(--color-mystic-gold);
+        font-size: 1.4rem;
+    }
+
+    .schedule-card h3 {
+        margin-block-start: 0.7rem;
+        font-family: var(--font-mystic);
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--color-mystic-ivory);
+    }
+
+    .schedule-card p:not(.eyebrow) {
+        margin-block: 0.75rem 1.5rem;
+        color: rgb(244 235 224 / 0.58);
+        font-size: 0.78rem;
+        line-height: 1.65;
+    }
+
+    .site-footer {
+        border-block-start: 1px solid rgb(216 193 250 / 0.06);
+        background: #090c1d;
+    }
+
+    .footer-title {
+        font-family: var(--font-mystic);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-mystic-gold);
+    }
+
+    .footer-links {
+        display: grid;
+        gap: 0.65rem;
+        margin-block-start: 1rem;
+        color: rgb(244 235 224 / 0.56);
+        font-size: 0.78rem;
+    }
+
+    .footer-links a {
+        width: fit-content;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+        color: var(--color-mystic-ivory);
+        outline: none;
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+    }
+}
+
+@media (min-width: 40rem) {
+    .mystic-container {
+        width: min(100% - 3rem, 75rem);
+    }
+}
+
+@media (min-width: 64rem) {
+    .hero-deck {
+        min-height: 40rem;
+    }
+
+    .deck-card {
+        width: 17rem;
+    }
+
+    .live-panel {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: stretch;
+    }
+
+    .package-featured {
+        transform: translateY(-0.75rem);
+    }
+}
+
+@media (max-width: 39.999rem) {
+    .brand-mark {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+
+    .hero-section .mystic-container {
+        padding-block-start: 2.4rem;
+    }
+
+    .hero-deck {
+        min-height: 25rem;
+    }
+
+    .deck-card {
+        width: 12rem;
+    }
+}
+
+@keyframes landing-rise {
+    from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes halo-breathe {
+    0%, 100% {
+        opacity: 0.72;
+        transform: scale(0.97);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes interpretation-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.4rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

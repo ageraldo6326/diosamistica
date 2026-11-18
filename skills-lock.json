@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "javascript-animation": {
+      "source": "iart-ai/javascript-animation-skills",
+      "sourceType": "github",
+      "skillPath": "skills/javascript-animation/SKILL.md",
+      "computedHash": "a3b24c2d543e2ccc58b5b8e02805c0f79f683f90a05fddac69538dd91f2ec1f7"
+    },
+    "livewire-development": {
+      "source": "spatie/freek.dev",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/livewire-development/SKILL.md",
+      "computedHash": "2797330b4840a67852cbf5459bb3bcb188a5c4ffa695d09d327c5b255d3a4b1b"
+    },
+    "responsive-design": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/ui-design/skills/responsive-design/SKILL.md",
+      "computedHash": "155eff4b1bc8d867ae6bea9900c485ab1081de0b4873c1900adb66bf62466aed"
+    }
+  }
+}
