@@ -14,6 +14,8 @@ Route::get('servicios/{service}', [ReadingServiceController::class, 'show'])
     ->whereIn('service', array_keys(config('lecturas.services')))
     ->name('services.show');
 
+Route::view('horoscopo', 'horoscope')->name('horoscope');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

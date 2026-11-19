@@ -7,78 +7,67 @@ const initializePublicPage = () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    const heroOracleCard = document.querySelector('[data-hero-oracle-card]');
+    const heroDeck = document.querySelector('[data-hero-deck]');
 
-    if (heroOracleCard) {
-        const oracleThemes = [
-            {
-                title: 'Lo que dice tu corazón',
-                topic: 'Amor & vínculos',
-                icon: '#oracle-heart',
-                number: 'VI',
-            },
-            {
-                title: 'Tu próximo gran paso',
-                topic: 'Negocios & decisiones',
-                icon: '#oracle-business',
-                number: 'X',
-            },
-            {
-                title: 'El rumbo que te llama',
-                topic: 'Viajes & nuevos caminos',
-                icon: '#oracle-travel',
-                number: 'VII',
-            },
-            {
-                title: 'Nuevas oportunidades',
-                topic: 'Dinero & abundancia',
-                icon: '#oracle-money',
-                number: 'IX',
-            },
-            {
-                title: 'Tu verdadera dirección',
-                topic: 'Propósito & crecimiento',
-                icon: '#oracle-purpose',
-                number: 'XVII',
-            },
-        ];
-        const oracleIcon = heroOracleCard.querySelector('[data-hero-oracle-icon-use]');
-        const oracleTitle = heroOracleCard.querySelector('[data-hero-oracle-title]');
-        const oracleTopic = heroOracleCard.querySelector('[data-hero-oracle-topic]');
-        const oracleNumber = heroOracleCard.querySelector('[data-hero-oracle-number]');
+    if (heroDeck) {
+        const mainImage = heroDeck.querySelector('[data-hero-card-main]');
+        const leftImage = heroDeck.querySelector('[data-hero-card-left]');
+        const rightImage = heroDeck.querySelector('[data-hero-card-right]');
+        const arcana = heroDeck.querySelector('[data-hero-card-arcana]');
+        const title = heroDeck.querySelector('[data-hero-card-title]');
+        const keywords = heroDeck.querySelector('[data-hero-card-keywords]');
 
-        if (oracleIcon && oracleTitle && oracleTopic && oracleNumber) {
-            let currentThemeIndex = Math.floor(Math.random() * oracleThemes.length);
+        if (mainImage && leftImage && rightImage && arcana && title && keywords) {
+            const cards = [
+                {
+                    image: mainImage.src,
+                    arcana: 'Arcano XI',
+                    title: 'La Justicia',
+                    keywords: 'Balance · elección · verdad',
+                },
+                {
+                    image: rightImage.src,
+                    arcana: 'Arcano XIX',
+                    title: 'El Sol',
+                    keywords: 'Expansión · confianza · visión',
+                },
+                {
+                    image: leftImage.src,
+                    arcana: 'Seis de Copas',
+                    title: 'Raíz viajera',
+                    keywords: 'Origen · memoria · impulso',
+                },
+            ];
+            let currentCardIndex = 0;
 
-            const applyOracleTheme = (themeIndex) => {
-                const theme = oracleThemes[themeIndex];
+            const renderCard = (cardIndex) => {
+                const previousCardIndex = (cardIndex + cards.length - 1) % cards.length;
+                const nextCardIndex = (cardIndex + 1) % cards.length;
+                const card = cards[cardIndex];
 
-                oracleIcon.setAttribute('href', theme.icon);
-                oracleTitle.textContent = theme.title;
-                oracleTopic.textContent = theme.topic;
-                oracleNumber.textContent = theme.number;
+                leftImage.src = cards[previousCardIndex].image;
+                mainImage.src = card.image;
+                rightImage.src = cards[nextCardIndex].image;
+                arcana.textContent = card.arcana;
+                title.textContent = card.title;
+                keywords.textContent = card.keywords;
             };
 
-            const showNextOracleTheme = () => {
-                let nextThemeIndex = currentThemeIndex;
-
-                while (nextThemeIndex === currentThemeIndex) {
-                    nextThemeIndex = Math.floor(Math.random() * oracleThemes.length);
-                }
-
-                heroOracleCard.classList.add('is-changing');
+            const showNextCard = () => {
+                heroDeck.classList.add('is-changing');
 
                 window.setTimeout(() => {
-                    currentThemeIndex = nextThemeIndex;
-                    applyOracleTheme(currentThemeIndex);
-                    heroOracleCard.classList.remove('is-changing');
+                    currentCardIndex = (currentCardIndex + 1) % cards.length;
+                    renderCard(currentCardIndex);
+
+                    window.requestAnimationFrame(() => {
+                        heroDeck.classList.remove('is-changing');
+                    });
                 }, 720);
             };
 
-            applyOracleTheme(currentThemeIndex);
-
             if (!prefersReducedMotion.matches) {
-                window.setInterval(showNextOracleTheme, 5600);
+                window.setInterval(showNextCard, 5600);
             }
         }
     }

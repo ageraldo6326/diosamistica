@@ -8,6 +8,11 @@
 
         <title>Diosa Mística · Lecturas de tarot</title>
 
+        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,600,700|dm-sans:400,500,600,700&display=swap" rel="stylesheet" />
 
@@ -21,6 +26,7 @@
             <span class="cosmic-stars cosmic-stars-far"></span>
             <span class="cosmic-smoke cosmic-smoke-one"></span>
             <span class="cosmic-smoke cosmic-smoke-two"></span>
+            <span class="cosmic-smoke cosmic-smoke-three"></span>
         </div>
 
         <header class="site-header">
@@ -41,6 +47,7 @@
 
                 <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
                     <a href="#servicios" class="nav-link">Lecturas y precios</a>
+                    <a href="{{ route('horoscope') }}" class="nav-link">Horóscopo IA</a>
                     <a href="#conocela" class="nav-link">Diosa Mística</a>
                     <a href="#tirada" class="nav-link">Tirada de muestra</a>
                     <a href="#preguntas" class="nav-link">Preguntas frecuentes</a>
@@ -59,6 +66,7 @@
                         </summary>
                         <nav class="mobile-menu-panel" aria-label="Navegación móvil">
                             <a href="#servicios">Lecturas y precios</a>
+                            <a href="{{ route('horoscope') }}">Horóscopo IA</a>
                             <a href="#conocela">Diosa Mística</a>
                             <a href="#tirada">Tirada de muestra</a>
                             <a href="#preguntas">Preguntas frecuentes</a>
@@ -94,52 +102,31 @@
                         </div>
                     </div>
 
-                    <div class="hero-deck" aria-label="Carta de oráculo con mensajes que cambian según distintos temas">
+                    <div class="hero-deck" role="img" aria-label="Tres cartas de tarot ilustradas: Seis de Copas, La Justicia y El Sol" data-hero-deck>
                         <div class="deck-halo" aria-hidden="true"></div>
-                        <div class="deck-card deck-card-main" aria-hidden="true" data-hero-oracle-card>
+                        <div class="deck-card deck-card-art deck-card-side deck-card-left" aria-hidden="true">
+                            <img class="deck-card-artwork" src="{{ asset('images/tarot/six-of-cups.webp') }}" alt="" width="1024" height="1536" fetchpriority="high" decoding="async" data-hero-card-left>
+                        </div>
+                        <div class="deck-card deck-card-art deck-card-side deck-card-right" aria-hidden="true">
+                            <img class="deck-card-artwork" src="{{ asset('images/tarot/the-sun.webp') }}" alt="" width="1024" height="1536" fetchpriority="high" decoding="async" data-hero-card-right>
+                        </div>
+                        <div class="deck-card deck-card-art deck-card-main" aria-hidden="true">
+                            <img class="deck-card-artwork" src="{{ asset('images/tarot/justice.webp') }}" alt="" width="1024" height="1536" fetchpriority="high" decoding="async" data-hero-card-main>
+                            <span class="deck-card-artwork-scrim"></span>
                             <svg class="deck-card-border-glow" viewBox="0 0 100 159" preserveAspectRatio="none" aria-hidden="true">
                                 <rect x="1" y="1" width="98" height="157" rx="8" pathLength="100" />
                             </svg>
-                            <div class="flex w-full items-center justify-between text-mystic-gold">
-                                <span>✦</span><span class="text-[0.58rem] font-bold uppercase tracking-[0.28em]">Oráculo eterno</span><span>✦</span>
-                            </div>
-                            <div class="card-orbit">
-                                <span class="orbit-star">☆</span>
-                                <svg viewBox="0 0 24 24" class="size-16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" data-hero-oracle-icon>
-                                    <defs>
-                                        <symbol id="oracle-heart" viewBox="0 0 24 24">
-                                            <path d="M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6l1.2 1.2L12 21l7.6-7.6 1.2-1.2a5.4 5.4 0 0 0 0-7.6Z" stroke-linecap="round" stroke-linejoin="round" />
-                                        </symbol>
-                                        <symbol id="oracle-business" viewBox="0 0 24 24">
-                                            <path d="M9 6V4h6v2M4 9h16v10H4V9Zm0 4c5.2 2 10.8 2 16 0M10 13h4" stroke-linecap="round" stroke-linejoin="round" />
-                                        </symbol>
-                                        <symbol id="oracle-travel" viewBox="0 0 24 24">
-                                            <circle cx="12" cy="12" r="9" />
-                                            <path d="m15.8 8.2-2.2 5.4-5.4 2.2 2.2-5.4 5.4-2.2Z" stroke-linecap="round" stroke-linejoin="round" />
-                                        </symbol>
-                                        <symbol id="oracle-money" viewBox="0 0 24 24">
-                                            <ellipse cx="12" cy="7" rx="7" ry="3" />
-                                            <path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5" stroke-linecap="round" />
-                                        </symbol>
-                                        <symbol id="oracle-purpose" viewBox="0 0 24 24">
-                                            <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z" stroke-linejoin="round" />
-                                            <path d="m18.5 16 .7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z" stroke-linejoin="round" />
-                                        </symbol>
-                                    </defs>
-                                    <use href="#oracle-purpose" data-hero-oracle-icon-use />
-                                </svg>
-                            </div>
-                            <div class="text-center">
-                                <p class="font-mystic text-2xl leading-none text-mystic-ivory" data-hero-oracle-title>Tu verdadera dirección</p>
-                                <p class="mt-3 text-[0.58rem] font-semibold uppercase tracking-[0.28em] text-mystic-lavender" data-hero-oracle-topic>Propósito & crecimiento</p>
-                            </div>
-                            <div class="flex w-full items-center justify-between text-xs text-mystic-gold"><span>☾</span><span data-hero-oracle-number>XVII</span><span>☼</span></div>
+                            <span class="deck-card-caption">
+                                <span class="deck-card-kicker"><span>✦</span><span data-hero-card-arcana>Arcano XI</span><span>✦</span></span>
+                                <span class="deck-card-title" data-hero-card-title>La Justicia</span>
+                                <span class="deck-card-keywords" data-hero-card-keywords>Balance · elección · verdad</span>
+                            </span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="servicios" class="services-section scroll-mt-20 bg-mystic-ink/90 py-20 sm:py-28" aria-labelledby="services-title" data-sticky-cta-hide>
+            <section id="servicios" class="services-section scroll-mt-20 bg-mystic-ink/70 py-20 sm:py-28" aria-labelledby="services-title" data-sticky-cta-hide>
                 <div class="mystic-container">
                     <div class="section-heading">
                         <p class="eyebrow justify-center">Elige según lo que necesitas</p>
@@ -225,7 +212,7 @@
                 </div>
             </section>
 
-            <section id="tirada" class="scroll-mt-20 bg-mystic-ink/90" aria-labelledby="tirada-title">
+            <section id="tirada" class="scroll-mt-20 bg-mystic-ink/70" aria-labelledby="tirada-title">
                 <div class="mystic-container py-20 sm:py-28">
                     <div class="section-heading max-w-3xl">
                         <p class="eyebrow justify-center">Prueba la experiencia</p>
@@ -236,7 +223,7 @@
                     <p id="card-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></p>
 
                     <div class="mt-12 grid gap-8 md:grid-cols-3 md:gap-5 lg:gap-8" data-tarot-reading>
-                        <article class="tarot-reading-card" data-tarot-card data-card-name="Raíz viajera">
+                        <article class="tarot-reading-card" data-tarot-card data-card-name="Seis de Copas">
                             <button type="button" class="tarot-card-button" aria-expanded="false" aria-describedby="past-reading" data-reveal-card>
                                 <span class="tarot-card-inner">
                                     <span class="tarot-face tarot-back">
@@ -246,11 +233,17 @@
                                         <span class="tarot-brand">Diosa Mística</span>
                                     </span>
                                     <span class="tarot-face tarot-front">
-                                        <span class="tarot-meta"><span>✦</span><span>I · Pasado</span><span>✦</span></span>
-                                        <span class="tarot-emblem">☾</span>
-                                        <strong>Raíz viajera</strong>
-                                        <span class="tarot-keyword">Origen · memoria · impulso</span>
-                                        <span class="tarot-brand">Arquetipo revelado</span>
+                                        <img class="tarot-artwork" src="{{ asset('images/tarot/six-of-cups.webp') }}" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+                                        <span class="tarot-artwork-scrim" aria-hidden="true"></span>
+                                        <span class="tarot-front-content">
+                                            <span class="tarot-meta"><span>✦</span><span>I · Pasado</span><span>✦</span></span>
+                                            <span class="tarot-title-group">
+                                                <span class="tarot-arcana">Seis de Copas</span>
+                                                <strong>Raíz viajera</strong>
+                                                <span class="tarot-keyword">Origen · memoria · impulso</span>
+                                            </span>
+                                            <span class="tarot-brand">Arquetipo revelado</span>
+                                        </span>
                                     </span>
                                 </span>
                             </button>
@@ -260,7 +253,7 @@
                             </div>
                         </article>
 
-                        <article class="tarot-reading-card" data-tarot-card data-card-name="El eje presente">
+                        <article class="tarot-reading-card" data-tarot-card data-card-name="La Justicia">
                             <button type="button" class="tarot-card-button" aria-expanded="false" aria-describedby="present-reading" data-reveal-card>
                                 <span class="tarot-card-inner">
                                     <span class="tarot-face tarot-back">
@@ -270,11 +263,17 @@
                                         <span class="tarot-brand">Diosa Mística</span>
                                     </span>
                                     <span class="tarot-face tarot-front">
-                                        <span class="tarot-meta"><span>✦</span><span>II · Presente</span><span>✦</span></span>
-                                        <span class="tarot-emblem">✧</span>
-                                        <strong>El eje presente</strong>
-                                        <span class="tarot-keyword">Balance · elección · verdad</span>
-                                        <span class="tarot-brand">Arquetipo revelado</span>
+                                        <img class="tarot-artwork" src="{{ asset('images/tarot/justice.webp') }}" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+                                        <span class="tarot-artwork-scrim" aria-hidden="true"></span>
+                                        <span class="tarot-front-content">
+                                            <span class="tarot-meta"><span>✦</span><span>II · Presente</span><span>✦</span></span>
+                                            <span class="tarot-title-group">
+                                                <span class="tarot-arcana">La Justicia</span>
+                                                <strong>El eje presente</strong>
+                                                <span class="tarot-keyword">Balance · elección · verdad</span>
+                                            </span>
+                                            <span class="tarot-brand">Arquetipo revelado</span>
+                                        </span>
                                     </span>
                                 </span>
                             </button>
@@ -284,7 +283,7 @@
                             </div>
                         </article>
 
-                        <article class="tarot-reading-card" data-tarot-card data-card-name="Horizonte solar">
+                        <article class="tarot-reading-card" data-tarot-card data-card-name="El Sol">
                             <button type="button" class="tarot-card-button" aria-expanded="false" aria-describedby="horizon-reading" data-reveal-card>
                                 <span class="tarot-card-inner">
                                     <span class="tarot-face tarot-back">
@@ -294,11 +293,17 @@
                                         <span class="tarot-brand">Diosa Mística</span>
                                     </span>
                                     <span class="tarot-face tarot-front">
-                                        <span class="tarot-meta"><span>✦</span><span>III · Horizonte</span><span>✦</span></span>
-                                        <span class="tarot-emblem">☼</span>
-                                        <strong>Horizonte solar</strong>
-                                        <span class="tarot-keyword">Expansión · confianza · visión</span>
-                                        <span class="tarot-brand">Arquetipo revelado</span>
+                                        <img class="tarot-artwork" src="{{ asset('images/tarot/the-sun.webp') }}" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+                                        <span class="tarot-artwork-scrim" aria-hidden="true"></span>
+                                        <span class="tarot-front-content">
+                                            <span class="tarot-meta"><span>✦</span><span>III · Horizonte</span><span>✦</span></span>
+                                            <span class="tarot-title-group">
+                                                <span class="tarot-arcana">El Sol</span>
+                                                <strong>Horizonte solar</strong>
+                                                <span class="tarot-keyword">Expansión · confianza · visión</span>
+                                            </span>
+                                            <span class="tarot-brand">Arquetipo revelado</span>
+                                        </span>
                                     </span>
                                 </span>
                             </button>
