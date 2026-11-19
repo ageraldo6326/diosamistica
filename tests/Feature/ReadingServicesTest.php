@@ -9,11 +9,11 @@ it('renders each service page with its confirmed information', function (string 
         ->assertSeeText($price)
         ->assertSeeText($detail)
         ->assertSeeText('Reservas en línea próximamente')
-        ->assertSeeText('Este sitio presenta la información del servicio. No procesa pagos ni reservas.');
+        ->assertSeeText('La reserva y el pago en línea estarán disponibles próximamente.');
 })->with([
-    'general reading' => ['general', 'Lectura general', 'US$87', 'Duración de 20 a 25 minutos'],
-    'emergency reading' => ['emergencia', 'Lectura de emergencia', 'US$120', 'Disponibilidad por confirmar'],
-    'single question reading' => ['una-pregunta', 'Lectura de una sola pregunta', 'US$20', 'Una pregunta concreta'],
+    'general reading' => ['general', 'Lectura general', 'US$87', '20 a 25 minutos para profundizar en tu situación'],
+    'emergency reading' => ['emergencia', 'Lectura de emergencia', 'US$120', 'Confirmación según disponibilidad de agenda'],
+    'single question reading' => ['una-pregunta', 'Lectura de una sola pregunta', 'US$20', 'Toda la lectura concentrada en una pregunta concreta'],
 ]);
 
 it('does not promise an unconfirmed response time for the emergency reading', function () {
@@ -21,7 +21,7 @@ it('does not promise an unconfirmed response time for the emergency reading', fu
 
     $response
         ->assertOk()
-        ->assertSeeText('Disponibilidad por confirmar')
+        ->assertSeeText('Sujeta a disponibilidad de agenda.')
         ->assertDontSeeText('48 horas');
 });
 

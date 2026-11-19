@@ -176,7 +176,7 @@ select:focus[data-flux-control] {
             radial-gradient(ellipse at 28% 48%, rgb(151 111 218 / 0.92), transparent 42%),
             radial-gradient(ellipse at 68% 44%, rgb(102 76 170 / 0.68), transparent 46%),
             radial-gradient(ellipse at 52% 72%, rgb(216 193 250 / 0.35), transparent 40%);
-        animation: smoke-drift-one 20s ease-in-out infinite alternate;
+        animation: smoke-drift-one 12s ease-in-out infinite alternate;
     }
 
     .cosmic-smoke-two {
@@ -186,7 +186,7 @@ select:focus[data-flux-control] {
             radial-gradient(ellipse at 66% 48%, rgb(199 151 225 / 0.72), transparent 43%),
             radial-gradient(ellipse at 34% 55%, rgb(244 203 141 / 0.46), transparent 41%),
             radial-gradient(ellipse at 52% 28%, rgb(96 74 165 / 0.62), transparent 45%);
-        animation: smoke-drift-two 24s 2s ease-in-out infinite alternate;
+        animation: smoke-drift-two 15s 1s ease-in-out infinite alternate;
     }
 
     .mystic-container {
@@ -559,21 +559,28 @@ select:focus[data-flux-control] {
         pointer-events: none;
     }
 
-    .deck-card-left {
-        transform: translateX(-25%) rotate(-13deg) translateZ(-3rem);
-        animation: deck-left-open 7.2s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-    }
-
-    .deck-card-right {
-        transform: translateX(25%) rotate(13deg) translateZ(-3rem);
-        animation: deck-right-open 7.2s 90ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-    }
-
     .deck-card-main {
         z-index: 2;
         align-items: center;
         transform: translateY(-0.6rem);
-        animation: deck-main-open 7.2s 180ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: oracle-card-float 8s ease-in-out infinite both;
+    }
+
+    .deck-card-border-glow {
+        position: absolute;
+        z-index: 4;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        fill: none;
+        pointer-events: none;
+        stroke: rgb(244 203 141 / 0.78);
+        stroke-width: 0.75;
+        stroke-linecap: round;
+        stroke-dasharray: 7 93;
+        filter: drop-shadow(0 0 0.12rem rgb(244 203 141 / 0.72)) drop-shadow(0 0 0.35rem rgb(216 193 250 / 0.48));
+        animation: card-border-glow 6.4s linear infinite;
     }
 
     .card-orbit {
@@ -585,6 +592,27 @@ select:focus[data-flux-control] {
         border-radius: 50%;
         background: radial-gradient(circle, rgb(216 193 250 / 0.11), transparent 67%);
         color: var(--color-mystic-gold);
+    }
+
+    [data-hero-oracle-icon],
+    [data-hero-oracle-title],
+    [data-hero-oracle-topic],
+    [data-hero-oracle-number] {
+        transition: opacity 720ms ease-in-out, transform 720ms ease-in-out, filter 720ms ease-in-out;
+    }
+
+    .deck-card-main.is-changing [data-hero-oracle-title],
+    .deck-card-main.is-changing [data-hero-oracle-topic],
+    .deck-card-main.is-changing [data-hero-oracle-number] {
+        opacity: 0;
+        transform: translateY(0.15rem);
+        filter: blur(2px);
+    }
+
+    .deck-card-main.is-changing [data-hero-oracle-icon] {
+        opacity: 0;
+        transform: scale(0.94);
+        filter: blur(2px);
     }
 
     .orbit-star {
@@ -1628,57 +1656,19 @@ select:focus[data-flux-control] {
     }
 }
 
-@keyframes deck-left-open {
-    0%, 38%, 100% {
-        transform: translateX(-25%) rotate(-13deg) translateZ(-3rem);
+@keyframes oracle-card-float {
+    0%, 100% {
+        transform: translateY(-0.6rem) rotate(-0.35deg);
     }
 
-    8% {
-        transform: translateX(-7%) translateY(-0.9rem) rotate(-3deg) translateZ(-2rem);
-    }
-
-    17% {
-        transform: translateX(18%) translateY(0.45rem) rotate(6deg) translateZ(-1rem);
-    }
-
-    27% {
-        transform: translateX(-4%) translateY(-0.35rem) rotate(-2deg) translateZ(-2rem);
+    50% {
+        transform: translateY(-1.15rem) rotate(0.35deg);
     }
 }
 
-@keyframes deck-right-open {
-    0%, 38%, 100% {
-        transform: translateX(25%) rotate(13deg) translateZ(-3rem);
-    }
-
-    8% {
-        transform: translateX(7%) translateY(0.55rem) rotate(3deg) translateZ(-1rem);
-    }
-
-    17% {
-        transform: translateX(-18%) translateY(-0.85rem) rotate(-6deg) translateZ(-2rem);
-    }
-
-    27% {
-        transform: translateX(5%) translateY(0.25rem) rotate(2deg) translateZ(-2rem);
-    }
-}
-
-@keyframes deck-main-open {
-    0%, 38%, 100% {
-        transform: translateY(-0.6rem) translateX(0) rotate(0) scale(1);
-    }
-
-    8% {
-        transform: translateY(-1.2rem) translateX(5%) rotate(2deg) scale(1.015);
-    }
-
-    17% {
-        transform: translateY(0.25rem) translateX(-5%) rotate(-2deg) scale(0.985);
-    }
-
-    27% {
-        transform: translateY(-0.9rem) translateX(2%) rotate(0.7deg) scale(1.01);
+@keyframes card-border-glow {
+    to {
+        stroke-dashoffset: -100;
     }
 }
 

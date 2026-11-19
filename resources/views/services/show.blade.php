@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{{ $readingService['name'] }} de Diosa Mística por US${{ number_format($readingService['price_cents'] / 100, 0) }}.">
+        <meta name="description" content="{{ $readingService['name'] }} con Diosa Mística por US${{ number_format($readingService['price_cents'] / 100, 0) }}. {{ $readingService['hook'] }}">
         <meta name="theme-color" content="#0D1024">
 
         <title>{{ $readingService['name'] }} · Diosa Mística</title>
@@ -34,7 +34,7 @@
 
                 <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
                     <a href="{{ route('home') }}" class="nav-link">Inicio</a>
-                    <a href="{{ route('home') }}#servicios" class="nav-link">Servicios y precios</a>
+                    <a href="{{ route('home') }}#servicios" class="nav-link">Lecturas y precios</a>
                     <a href="{{ route('home') }}#tirada" class="nav-link">Tirada de muestra</a>
                     <a href="{{ route('home') }}#conocela" class="nav-link">Diosa Mística</a>
                     <a href="{{ route('home') }}#preguntas" class="nav-link">Preguntas frecuentes</a>
@@ -42,8 +42,8 @@
 
                 <div class="flex items-center gap-2">
                     <a href="{{ route('home') }}#servicios" class="header-services-cta button button-primary min-h-11 px-4 sm:px-5">
-                        <span class="sm:hidden">Servicios</span>
-                        <span class="hidden sm:inline">Ver servicios</span>
+                        <span class="sm:hidden">Lecturas</span>
+                        <span class="hidden sm:inline">Encontrar mi lectura</span>
                     </a>
 
                     <details class="mobile-menu relative lg:hidden">
@@ -54,7 +54,7 @@
                         </summary>
                         <nav class="mobile-menu-panel" aria-label="Navegación móvil">
                             <a href="{{ route('home') }}">Inicio</a>
-                            <a href="{{ route('home') }}#servicios">Servicios y precios</a>
+                            <a href="{{ route('home') }}#servicios">Lecturas y precios</a>
                             <a href="{{ route('home') }}#tirada">Tirada de muestra</a>
                             <a href="{{ route('home') }}#conocela">Diosa Mística</a>
                             <a href="{{ route('home') }}#preguntas">Preguntas frecuentes</a>
@@ -70,7 +70,7 @@
                     <div class="relative z-10 max-w-2xl">
                         <a href="{{ route('home') }}#servicios" class="service-back-link">
                             <span aria-hidden="true">←</span>
-                            Todos los servicios
+                            Comparar todas las lecturas
                         </a>
                         <p class="eyebrow mt-8">
                             <span aria-hidden="true">✦</span>
@@ -79,14 +79,14 @@
                         <h1 id="service-title" class="mt-5 font-mystic text-[clamp(3.2rem,11vw,5.8rem)] leading-[0.9] font-medium tracking-[-0.035em] text-mystic-ivory">
                             {{ $readingService['name'] }}
                         </h1>
-                        <p class="mt-6 max-w-xl text-base leading-8 text-mystic-ivory/72 sm:text-lg">{{ $readingService['summary'] }}</p>
+                        <p class="mt-6 max-w-xl text-base leading-8 text-mystic-ivory/72 sm:text-lg">{{ $readingService['hook'] }} {{ $readingService['summary'] }}</p>
 
                         @isset($readingService['status'])
                             <p class="service-status mt-6 w-fit">{{ $readingService['status'] }}</p>
                         @endisset
 
                         <div class="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                            <a href="{{ route('home') }}#servicios" class="button button-gold w-full sm:w-auto">Elegir en el catálogo</a>
+                            <a href="{{ route('home') }}#servicios" class="button button-gold w-full sm:w-auto">Elegir esta lectura</a>
                             <p class="text-sm font-semibold text-mystic-lavender">Reservas en línea próximamente</p>
                         </div>
                     </div>
@@ -97,14 +97,14 @@
                             <span>☾</span>
                             <span>✦</span>
                         </div>
-                        <p class="service-label">Precio</p>
+                        <p class="service-label">Valor de la lectura</p>
                         <p class="service-detail-price">US${{ number_format($readingService['price_cents'] / 100, 0) }}</p>
                         <ul class="service-detail-list">
                             @foreach ($readingService['details'] as $detail)
                                 <li><span aria-hidden="true">✦</span> {{ $detail }}</li>
                             @endforeach
                         </ul>
-                        <p class="service-detail-note">Este sitio presenta la información del servicio. No procesa pagos ni reservas.</p>
+                        <p class="service-detail-note">La reserva y el pago en línea estarán disponibles próximamente.</p>
                     </aside>
                 </div>
             </section>
@@ -112,9 +112,9 @@
             <section class="section-shell py-20 sm:py-24" aria-labelledby="other-services-title">
                 <div class="mystic-container">
                     <div class="section-heading">
-                        <p class="eyebrow justify-center">Explora tus opciones</p>
-                        <h2 id="other-services-title">Otros servicios</h2>
-                        <p>Puedes comparar las tres lecturas antes de elegir.</p>
+                        <p class="eyebrow justify-center">Compara antes de decidir</p>
+                        <h2 id="other-services-title">Encuentra la lectura adecuada para tu momento</h2>
+                        <p>Cada formato responde a una necesidad distinta. Revisa las opciones y elige con confianza.</p>
                     </div>
 
                     <div class="mt-12 grid gap-5 md:grid-cols-2">
@@ -134,7 +134,7 @@
                         @endforeach
                     </div>
 
-                    <p class="payment-note">Métodos previstos para las reservas: PayPal y transferencias a Banco BHD, Banco Popular o Banreservas</p>
+                    <p class="payment-note">Cuando se habiliten las reservas, podrás pagar con PayPal o mediante transferencia a Banco BHD, Banco Popular o Banreservas.</p>
                 </div>
             </section>
         </main>
@@ -145,7 +145,7 @@
                     <span class="brand-mark" aria-hidden="true">☾</span>
                     <span class="font-mystic text-xl font-semibold tracking-[0.18em] text-mystic-ivory">DIOSA MÍSTICA</span>
                 </a>
-                <p>© {{ date('Y') }} Diosa Mística · Lectura simbólica · Sin transacciones</p>
+                <p>© {{ date('Y') }} Diosa Mística · Lectura simbólica · Reservas próximamente</p>
             </div>
         </footer>
     </body>
